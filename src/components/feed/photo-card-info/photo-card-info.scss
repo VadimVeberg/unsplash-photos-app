@@ -1,0 +1,45 @@
+@import '../../../assets/styles/vars';
+
+.photo-card__info {
+    width: 100%;
+    margin-top: 17px;
+
+    @media (max-width: 576px) {
+        margin-top: 8px;
+     }
+}
+
+
+.photo-info {
+    padding: 0 7px;
+
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+
+    @media (max-width: 576px) {
+        padding: 0 3px;
+     }
+}
+
+.photo-info__author-link {
+    color: $black;
+    font-size: 16px;
+
+    font-weight: 600;
+    line-height: 1.2;
+
+    transition: all .1s linear;
+
+    flex-grow: 1;
+
+    &:hover {
+        color: $red;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 12px;
+     }
+}

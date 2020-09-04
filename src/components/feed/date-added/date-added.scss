@@ -1,0 +1,17 @@
+@import '../../../assets/styles/vars';
+
+.photo-info__date {
+    flex-basis: 100%;
+
+    margin-top: 4px;
+    
+    font-size: 12px;
+    font-weight: 300;
+
+    color: $gray;
+    @media (max-width: 576px) {
+        font-size: 9px;
+
+        margin-top: 2px;
+     }
+}

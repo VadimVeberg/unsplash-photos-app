@@ -1,0 +1,44 @@
+@import '../../assets/styles/vars';
+
+.App {
+    overflow: hidden;
+    position: relative;
+
+    width: 780px;
+    height: 95vh;
+
+    border-radius: 10px;
+    background-color: $white;
+    border-radius: 10px;
+
+    // margin-top: 20px;
+
+    @media (max-width: 576px) {
+        margin-top: 0;
+
+        height: 100vh;
+
+        border-radius: 0;
+    }
+}
+
+.App__header {
+    height: 55px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: sticky; 
+    top: 0;
+
+    background-color: darken($white, 5%);
+    z-index: 1;
+    box-shadow: 0px -5px 11px gray;
+}
+
+.App__icon {
+    height: 25px;
+    width: 25px;
+}
