@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import './app-content.scss';
 import {Row, Col} from 'reactstrap';
 
-import PhotoCard from '../photo-card/photo-card';
-
 class AppContent extends Component {
     constructor(props) {
         super();

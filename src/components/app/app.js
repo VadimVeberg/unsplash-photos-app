@@ -1,58 +1,69 @@
 import React from 'react';
-import {Container} from 'reactstrap';
-import './app.scss';
+//Components
+import LogInPage from '../pages/log-in-page';
+import FeedPage from '../pages/feed-page';
+import BigPhotoPage from '../pages/big-photo-page';
+//styles
+import styled, { ThemeProvider } from 'styled-components';
+import { Container } from 'reactstrap';
+import { theme } from '../../style_vars';
+//router
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { connect } from 'react-redux';
-import {getLastPhotos} from '../../actions/FeedActions';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {BigPhotoPage} from '../big-photo-page/big-photo-page';
+const AppContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+  padding: 0;
 
-import LogInPage from '../log-in-page/log-in-page';
-import Feed from '../feed/feed';
+    @media (max-width: 576px) {
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0;
+    }
+`;
 
-const containerStyle = {
-  padding: 0
-}
+const AppBlock = styled.div`
+  position: relative;
 
-function App(props) {
-  const {getLastPhotos} = props;
+  width: 780px;
+  height: 95vh;
+  overflow: hidden;
+  margin-top: 20px;
+
+  border-radius: 10px;
+  background-color: ${props => props.theme.white};
+  box-shadow: 0px 0px 25px ${props => props.theme.black};
+
+  @media (max-width: 576px) {
+      height: 100vh;
+      margin-top: 0;
+
+      border-radius: 0;
+  }
+`;
+
+const App = (props) => {
   return (
-      <Container className="App-container" style={containerStyle}>
-          <div className="App">
-            <Router>
-              <Switch>
-              <Route exact path='/auth'>
-                <LogInPage/>
-              </Route>
-              <Route  path='/' render={routeProps => (
-                <Feed getLastPhotosAction={getLastPhotos} />
-              )}/>
-              {/* <Route path='/:path/:src' component={BigPhotoPage}/> */}
-              </Switch>
-            </Router>
-          </div>
-      </Container> 
+    <Router>
+      <ThemeProvider theme={theme}>  {/* making access to global style variables */}
+        <AppContainer>
+          {/*TODO in Safari border radius of app is blincking*/}
+            <AppBlock>
+                <Switch>
+                  <Route exact path='/auth' component={LogInPage}/>
+                  <Route  exact path='/' component={FeedPage}/>
+                  <Route exact path='/:id' render={({match}) => {
+                    const {id} = match.params;
+                    return <BigPhotoPage photoId={id}/>
+                  }}/>
+                </Switch>
+            </AppBlock>
+        </AppContainer> 
+      </ThemeProvider>
+    </Router>
   );
 }
 
-
-/* Redux */
-
-const mapStateToProps = store => {
-  console.log(store)
-  return {
-    feed: store.feed,
-    photoCard: store.photoCard,
-
-  }
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getLastPhotos: () => dispatch(getLastPhotos())
-  }
-};
- 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App;
 
 
