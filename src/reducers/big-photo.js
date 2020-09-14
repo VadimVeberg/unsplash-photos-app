@@ -1,10 +1,10 @@
-import { GET_BIG_PHOTO_REQUEST, GET_BIG_PHOTO_SUCCESS, GET_BIG_PHOTO_FAIL, CLEAR_STORE } from '../actions/BigPhotoActions';
+import { GET_BIG_PHOTO_REQUEST, GET_BIG_PHOTO_SUCCESS, GET_BIG_PHOTO_FAIL, CLEAR_STORE, LIKE_PHOTO_REQUEST, LIKE_PHOTO_SUCCESS, LIKE_PHOTO_FAIL, UNLIKE_PHOTO_REQUEST, UNLIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_FAIL } from '../actions/BigPhotoActions';
 
 const initialState = {
     bigPhotoData: {
     },
     error: '',
-    isFetching: false
+    isFetching: false,
 }
 
 export function bigPhotoReducer(state = initialState, action) {
@@ -29,10 +29,35 @@ export function bigPhotoReducer(state = initialState, action) {
                 error: action.payload.message
             }
         case CLEAR_STORE:
-            console.log('cleared');
-            return {
+                return {
                 initialState
             }
+        case LIKE_PHOTO_REQUEST: 
+            return {
+                ...state
+            }
+        case LIKE_PHOTO_SUCCESS: 
+            return {
+                ...state,
+                bigPhotoData: {
+                    ...state.bigPhotoData,
+                    liked_by_user: true
+                }
+            }
+        case LIKE_PHOTO_FAIL: 
+            return state
+        case UNLIKE_PHOTO_REQUEST: 
+            return state
+        case UNLIKE_PHOTO_SUCCESS: 
+            return {
+                ...state,
+                bigPhotoData: {
+                    ...state.bigPhotoData,
+                    liked_by_user: false
+                }
+            }
+        case UNLIKE_PHOTO_FAIL: 
+            return state
         default: 
         return state;
     }

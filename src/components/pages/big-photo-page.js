@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getBigPhoto, clearStore} from '../../actions/BigPhotoActions';
+import { getBigPhoto, clearStore, likePhoto, unLikePhoto } from '../../actions/BigPhotoActions';
 
 //router 
 import {Link} from 'react-router-dom';
@@ -32,14 +32,15 @@ class BigPhotoPage extends Component {
         super();
     }
 
-    async componentDidMount() {
-        this.props.clearStore();
+    componentDidMount() {
+        if (this.props.photoId !== this.props.bigPhoto.id) {
+            this.props.clearStore();
+        }
         this.props.getBigPhoto(this.props.photoId);
     }
 
     render() {
         const error = this.props.bigPhoto.error ? <UserMessage error={true} text={`Error! Can't load photo`}/> : null;
-        console.log(this.props);
         const loading = this.props.bigPhoto.isFetching ? <Spinner small/> : null;
         
         return (
@@ -50,7 +51,10 @@ class BigPhotoPage extends Component {
                     </UndoLink>
                 </AppHeader>
                 <AppContent>
-                    <BigPhotoItem data={this.props.bigPhoto.bigPhotoData}/>
+                    <BigPhotoItem
+                        data={this.props.bigPhoto.bigPhotoData}
+                        likePhoto={this.props.likePhoto}
+                        unLikePhoto={this.props.unLikePhoto}/>
                     <LoadingStatus>
                         {loading}
                         {error}
@@ -63,7 +67,6 @@ class BigPhotoPage extends Component {
 }
 
 const mapStateToProps = store => {
-    // console.log(store);
     return {
         bigPhoto: store.bigPhoto
     }
@@ -72,7 +75,9 @@ const mapStateToProps = store => {
   const mapDispatchToProps = dispatch => {
     return {
       getBigPhoto: id => dispatch(getBigPhoto(id)),
-      clearStore: () => dispatch(clearStore())
+      clearStore: () => dispatch(clearStore()),
+      likePhoto: (id) => dispatch(likePhoto(id)),
+      unLikePhoto: (id) => dispatch(unLikePhoto(id))
     }
   }
 

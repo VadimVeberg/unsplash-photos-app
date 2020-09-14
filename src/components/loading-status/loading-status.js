@@ -8,7 +8,7 @@ const LoadingStatusWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
-    height: 120px;
+    max-height: 120px;
 `;
 
 const LoadingStatus = (props) => {

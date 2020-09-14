@@ -4,7 +4,7 @@ import Picture from '../picture/picture';
 import PhotoCard from '../photo-card/photo-card';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
-import LikesIcon from '../likes-icon/likes-icon';
+import LikesIcon from '../likes/likes-icon';
 
 //styles
 import styled from 'styled-components';

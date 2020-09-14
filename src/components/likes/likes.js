@@ -1,5 +1,8 @@
 import React from 'react';
 
+//components
+import LikesIcon from './likes-icon';
+
 //styles
 import styled from 'styled-components';
 
@@ -16,8 +19,9 @@ const LikesCount = styled.div`
 const Likes = ({countOfLikes, ...props}) => {
     return (
         <LikesCount>
-            <span>{countOfLikes}</span>
             {props.children}
+            <span>{countOfLikes}</span> 
+            <LikesIcon/>
         </LikesCount>
     )
 };

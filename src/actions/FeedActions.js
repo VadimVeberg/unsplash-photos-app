@@ -4,7 +4,7 @@ import { extractDateString, calcAspectRatio } from '../utils/utils';
 export const GET_LAST_PHOTOS_REQUEST = 'GET_LAST_PHOTOS_REQUEST';
 export const GET_LAST_PHOTOS_SUCCESS = 'GET_LAST_PHOTOS_SUCCESS';
 export const GET_LAST_PHOTOS_FAIL = 'GET_LAST_PHOTOS_FAIL';
-export const WRITE_SCROLL_POSITION = 'WRITE_SCROLL_POSITION';
+export const SET_SCROLL_POSITION = 'SET_SCROLL_POSITION';
 
 let pagecounter = 1;
 let uniqueIDs = [];
@@ -105,11 +105,11 @@ export const getLastPhotos = () => {
     };
 };
 
-export const writeScrollPosition = (scrollTop) => {
+export const setScrollPosition = (scrollTop) => {
     return dispatch => {
         console.log('rpo')
         dispatch({
-            type: WRITE_SCROLL_POSITION,
+            type: SET_SCROLL_POSITION,
             payload: scrollTop
         })
     }

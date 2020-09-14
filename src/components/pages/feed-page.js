@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //Components
 import AppHeader from '../app-header/app-header';
-import AppContent from '../app-content/app-content';
+import FeedAppContent from '../feed-app-content/feed-app-content';
 import FeedItem from '../feed-item/feed-item';
 import UserMessage from '../userMessage/userMessage';
 import Spinner from '../spinner/spinner';
@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getLastPhotos, writeScrollPosition } from '../../actions/FeedActions';
+import { getLastPhotos, setScrollPosition } from '../../actions/FeedActions';
 
 const FeedRow = styled.div`
   display: flex;
@@ -21,6 +21,8 @@ const FeedRow = styled.div`
 
   width: 100%;
 `;
+
+//TODO прописать хук componentdidupdate, аргументы - prevProps и prevState 
 
 const FeedCol = styled.div`
   display: flex;
@@ -42,7 +44,7 @@ class FeedPage extends Component {
   }
 
   onScrollFeed = (e) => {
-    this.props.writeScrollPosition(e.target.scrollTop);
+    this.props.setScrollPosition(e.target.scrollTop);
 
     const scrollBottom = e.target.scrollTop + 
     e.target.offsetHeight ===  e.target.scrollHeight;
@@ -51,7 +53,7 @@ class FeedPage extends Component {
     }
   }
 
-  //TODO make scroll not scrobbling when return to previous page
+  //TODO make scroll not scrobbling when user returns to previous page
   setScrollPosition(ref) {
     ref.current.scrollTop = this.props.feed.scrollPosition;
   }
@@ -69,7 +71,7 @@ class FeedPage extends Component {
     return (
       <>
           <AppHeader/>
-          <AppContent onScrollFeed={this.onScrollFeed} setScrollPosition={this.setScrollPosition}>
+          <FeedAppContent onScrollFeed={this.onScrollFeed} setScrollPosition={this.setScrollPosition}>
             <FeedRow>
               <FeedCol >
                   {this.renderItems(this.props.feed.photos.leftColSources)}
@@ -82,7 +84,7 @@ class FeedPage extends Component {
               {loading}
               {error}
             </LoadingStatus>
-          </AppContent>
+          </FeedAppContent>
       </>
     );
   }
@@ -98,7 +100,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getLastPhotos: () => dispatch(getLastPhotos()),
-    writeScrollPosition: (scrollTop) => dispatch(writeScrollPosition(scrollTop))
+    setScrollPosition: (scrollTop) => dispatch(setScrollPosition(scrollTop))
   }
 }
    

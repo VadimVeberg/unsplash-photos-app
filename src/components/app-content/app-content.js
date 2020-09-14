@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 //styles
-import './app-content.scss';
 import styled from 'styled-components';
 
 const ContentField = styled.div`
@@ -30,19 +29,12 @@ const Content = styled.div`
     align-items: center;
     flex-direction: column;
 
+    border-radius: inherit;
+
     padding-bottom: 20px;
 `;
 
-const AppContent = ({onScrollFeed, setScrollPosition, ...props}) => {
-    //TODO BREAK make useRef hook to change scrollTop
-    const appContentElement = useRef(null);
-
-    useEffect(() => {
-        if (setScrollPosition) {
-            setScrollPosition(appContentElement);
-        }
-    }, [])
-
+const AppContent = ({onScrollFeed, setScrollPosition, appContentElement, ...props}) => {
     return (
         <ContentField
         onScroll={onScrollFeed ? e => onScrollFeed(e) : null} ref={appContentElement}>

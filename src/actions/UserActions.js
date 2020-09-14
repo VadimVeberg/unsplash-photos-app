@@ -11,16 +11,19 @@ const auth = (dispatch) => {
     ]);
 
     //eslint-disable-next-line no-undef
-    window.location.assign(authenticationUrl);
+    const code = window.location.search.split('code=')[1];
+    // window.location.assign(authenticationUrl);
 
     //eslint-disable-next-line no-undef
-    const code = window.location.search.split('code=')[1];
+    // const code = window.location.search.split('code=')[1];
 
+    console.log(code);
     if (code) {
         unsplash.auth.userAuthentication(code)
         .then(res => res.json())
         .then(json => {
 
+            alert(json.access_token);
             unsplash.auth.setBearerToken(json.access_token);
 
             dispatch({

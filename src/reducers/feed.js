@@ -1,4 +1,4 @@
-import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, WRITE_SCROLL_POSITION } from '../actions/FeedActions';
+import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, SET_SCROLL_POSITION } from '../actions/FeedActions';
 
 const initialState = {
     photos: {
@@ -8,7 +8,9 @@ const initialState = {
     error: '',
     isFetching: false,
     isShowedOnce: false,     // to avoid requests when the user returns from big photo to feed
-    scrollPosition: 0
+    scrollPosition: 0,
+    //TODO remove it if unneccessary
+    isScrollPositionSetted: false   // to render component after setting scroll position
 }
 
 export function feedReducer(state = initialState, action) {
@@ -36,7 +38,7 @@ export function feedReducer(state = initialState, action) {
                 isFetching: false,
                 error: action.payload.message
             }
-        case WRITE_SCROLL_POSITION:
+        case SET_SCROLL_POSITION:
             return {
                 ...state,
                 scrollPosition: action.payload
