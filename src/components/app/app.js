@@ -1,12 +1,19 @@
 import React from 'react';
+
 //Components
 import LogInPage from '../pages/log-in-page';
 import FeedPage from '../pages/feed-page';
 import BigPhotoPage from '../pages/big-photo-page';
+
 //styles
 import styled, { ThemeProvider } from 'styled-components';
 import { Container } from 'reactstrap';
 import { theme } from '../../style_vars';
+
+//Redux
+import { connect } from 'react-redux';
+import { auth} from '../../actions/FeedActions';
+
 //router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
@@ -66,6 +73,12 @@ const App = (props) => {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    auth: (code) => dispatch(auth(code)),
+  }
+}
+   
+export default connect(mapDispatchToProps)(App);
 
 

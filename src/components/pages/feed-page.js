@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getAuthUrl, auth, getLastPhotos, setScrollPosition } from '../../actions/FeedActions';
+import { getAuthUrl, auth, getLastPhotos, rememberScrollPosition } from '../../actions/FeedActions';
 
 const FeedRow = styled.div`
   display: flex;
@@ -41,17 +41,12 @@ class FeedPage extends Component {
     if (!this.props.feed.token) {
       this.props.getAuthUrl();
     } else if (!this.props.feed.isShowedOnce) {
+      this.props.getLastPhotos();
       this.props.auth(this.props.feed.token);
     }
-    this.props.getLastPhotos();
   }
 
-  // componentWillUnmount() {
-  //   this.props.setScrollPosition(e.target.scrollTop);
-  // }
-
   onScrollFeed = (e) => {
-
     const scrollBottom = e.target.scrollTop + 
     e.target.offsetHeight ===  e.target.scrollHeight;
     if (scrollBottom) {
@@ -77,7 +72,10 @@ class FeedPage extends Component {
     return (
       <>
           <AppHeader/>
-          <FeedAppContent onScrollFeed={this.onScrollFeed} setScrollPosition={this.setScrollPosition}>
+          <FeedAppContent 
+          onScrollFeed={this.onScrollFeed} 
+          setScrollPosition={this.setScrollPosition}
+          rememberScrollPosition={this.props.rememberScrollPosition}>
             <FeedRow>
               <FeedCol >
                   {this.renderItems(this.props.feed.photos.leftColSources)}
@@ -97,7 +95,6 @@ class FeedPage extends Component {
 }
 
 const mapStateToProps = store => {
-  // console.log(store);
   return {
     feed: store.feed
   }
@@ -108,8 +105,8 @@ const mapDispatchToProps = dispatch => {
     getAuthUrl: () => dispatch(getAuthUrl()),
     auth: (code) => dispatch(auth(code)),
     getLastPhotos: () => dispatch(getLastPhotos()),
-    setScrollPosition: (scrollTop) => dispatch(setScrollPosition(scrollTop))
+    rememberScrollPosition: (scrollTop) => dispatch(rememberScrollPosition(scrollTop))
   }
 }
    
-  export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FeedPage);

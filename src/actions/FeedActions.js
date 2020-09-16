@@ -4,7 +4,7 @@ import { extractDateString, calcAspectRatio } from '../utils/utils';
 export const GET_LAST_PHOTOS_REQUEST = 'GET_LAST_PHOTOS_REQUEST';
 export const GET_LAST_PHOTOS_SUCCESS = 'GET_LAST_PHOTOS_SUCCESS';
 export const GET_LAST_PHOTOS_FAIL = 'GET_LAST_PHOTOS_FAIL';
-export const SET_SCROLL_POSITION = 'SET_SCROLL_POSITION';
+export const REMEMBER_SCROLL_POSITION = 'REMEMBER_SCROLL_POSITION';
 export const GET_AUTH_URL_REQUEST = 'GET_AUTH_URL_REQUEST';
 export const GET_AUTH_URL_SUCCESS = 'GET_AUTH_URL_SUCCESS';
 export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
@@ -168,11 +168,11 @@ export const getLastPhotos = () => {
 };
 
 //TODO make setting of scroll position without dispatching action because of state is updating and requests are sending
-export const setScrollPosition = (scrollTop) => {
+export const rememberScrollPosition = (scrollTop) => {
     return dispatch => {
-        console.log('rpo')
+        //TODO rename actions to remember scroll position
         dispatch({
-            type: SET_SCROLL_POSITION,
+            type: REMEMBER_SCROLL_POSITION,
             payload: scrollTop
         })
     }

@@ -1,4 +1,4 @@
-import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, SET_SCROLL_POSITION, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS,
+import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS,
 AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAIL } from '../actions/FeedActions';
 
 const initialState = {
@@ -40,7 +40,7 @@ export function feedReducer(state = initialState, action) {
                 isFetching: false,
                 error: action.payload.message
             }
-        case SET_SCROLL_POSITION:
+        case REMEMBER_SCROLL_POSITION:
             return {
                 ...state,
                 scrollPosition: action.payload
