@@ -1,10 +1,11 @@
-import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL  } from '../actions/GlobalActions';
+import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS  } from '../actions/GlobalActions';
 
 const initialState = {
     token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
     isTokenSetted: false,
     errors: {
-        setTokenError: ''
+        getAuthUrlError: '',
+        setTokenError: '',
     }
 }
 
@@ -31,6 +32,23 @@ export function globalReducer(state = initialState, action) {
                     setTokenError: `Can't set token: ${action.payload}`
                 },
                 isTokenSetted: false
+            }
+
+        case GET_AUTH_URL_REQUEST:
+            return {                
+                ...state,
+            }
+        case GET_AUTH_URL_SUCCESS:
+            return {                
+                ...state,
+            }
+        case GET_AUTH_URL_FAIL:
+            return {
+                ...state,
+                error: {
+                    ...state.error,
+                    getAuthUrlError: `Can't get auth url: ${action.payload}`
+                }            
             }
         default: 
         return state;

@@ -15,7 +15,6 @@ import styled from 'styled-components';
 //Redux
 import { connect } from 'react-redux';
 import { getBigPhoto, clearStore, likePhoto, unLikePhoto } from '../../actions/BigPhotoActions';
-import { setToken } from '../../actions/GlobalActions';
 
 //router 
 import {Link} from 'react-router-dom';
@@ -35,8 +34,8 @@ class BigPhotoPage extends Component {
 
     componentDidMount() {
         if (!this.props.token) {
-            //TODO make request to get token
-        } else if (!this.props.isTokenSetted){          //if token is not setted, make setToken action
+            this.props.getAuthUrl();
+        } else if (!this.props.isTokenSetted) {          //if token is not setted, make setToken action
             this.props.setToken(this.props.token);
         }
 
@@ -82,7 +81,6 @@ const mapStateToProps = store => {
   
   const mapDispatchToProps = dispatch => {
     return {
-        setToken: (code) => dispatch(setToken(code)),
         getBigPhoto: id => dispatch(getBigPhoto(id)),
         clearStore: () => dispatch(clearStore()),
         likePhoto: (id) => dispatch(likePhoto(id)),

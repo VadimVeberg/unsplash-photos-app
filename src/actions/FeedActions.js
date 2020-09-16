@@ -5,9 +5,6 @@ export const GET_LAST_PHOTOS_REQUEST = 'GET_LAST_PHOTOS_REQUEST';
 export const GET_LAST_PHOTOS_SUCCESS = 'GET_LAST_PHOTOS_SUCCESS';
 export const GET_LAST_PHOTOS_FAIL = 'GET_LAST_PHOTOS_FAIL';
 export const REMEMBER_SCROLL_POSITION = 'REMEMBER_SCROLL_POSITION';
-export const GET_AUTH_URL_REQUEST = 'GET_AUTH_URL_REQUEST';
-export const GET_AUTH_URL_SUCCESS = 'GET_AUTH_URL_SUCCESS';
-export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
 
 let pagecounter = 1;
 let uniqueIDs = [];
@@ -80,39 +77,6 @@ const extractDataFromFeed = (arr) => {
     }
     return splitDataToColumns(photos);
 };
-
-const getURL = (dispatch) => {
-    try {
-        const authenticationUrl = unsplash.auth.getAuthenticationUrl([
-            "public",
-            "write_likes"
-        ]);
-
-        if (authenticationUrl) {
-            dispatch({
-                type: GET_AUTH_URL_SUCCESS
-            })
-        }
-    
-        //eslint-disable-next-line no-undef
-        window.location.assign(authenticationUrl);
-    } catch (e) {
-        dispatch({
-            type: GET_AUTH_URL_FAIL,
-            payload: e.message
-        });
-    }
-}
-
-export const getAuthUrl= () => {
-    return dispatch => {
-        dispatch({
-            type: GET_AUTH_URL_REQUEST
-        })
-
-        getURL(dispatch);
-    }
-}
 
 const getPhotos = (pageNumber, dispatch) => {
     unsplash.photos.listPhotos(pageNumber, 10, "latest")

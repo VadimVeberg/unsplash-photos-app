@@ -1,6 +1,4 @@
-import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS } from '../actions/FeedActions';
-
-import { LIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_SUCCESS } from '../actions/BigPhotoActions';
+import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION } from '../actions/FeedActions';
 
 const initialState = {
     photos: {
@@ -42,23 +40,6 @@ export function feedReducer(state = initialState, action) {
             return {
                 ...state,
                 scrollPosition: action.payload
-            }
-        case GET_AUTH_URL_REQUEST:
-            return {                
-                ...state,
-                isFetching: true,
-                error: '',
-            }
-        case GET_AUTH_URL_SUCCESS:
-            return {                
-                ...state,
-                isFetching: false,
-            }
-        case GET_AUTH_URL_FAIL:
-            return {
-                ...state,
-                isFetching: false,
-                error: action.payload.message                
             }
         // case LIKE_PHOTO_SUCCESS:
         //     let index = state.photos.leftColSources.findIndex(photo => photo.id === action.payload);

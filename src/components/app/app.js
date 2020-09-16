@@ -12,6 +12,7 @@ import { theme } from '../../style_vars';
 
 //Redux
 import { connect } from 'react-redux';
+import { setToken, getAuthUrl } from '../../actions/GlobalActions';
 
 //router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -58,11 +59,21 @@ const App = (props) => {
                 <Switch>
                   <Route exact path='/auth' component={LogInPage}/>
                   <Route  exact path='/' render={() => {
-                    return <FeedPage token={props.global.token} isTokenSetted={props.global.isTokenSetted}/>
+                    return <FeedPage 
+                      setToken={props.setToken}
+                      getAuthUrl={props.getAuthUrl}
+                      token={props.global.token} 
+                      isTokenSetted={props.global.isTokenSetted}/>
                   }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
-                    return <BigPhotoPage photoId={id} token={props.global.token} isTokenSetted={props.global.isTokenSetted}/>
+                    return <BigPhotoPage 
+                      photoId={id} 
+                      //TODO join a few props to one token={props.global.token} 
+                      setToken={props.setToken}
+                      getAuthUrl={props.getAuthUrl}
+                      token={props.global.token} 
+                      isTokenSetted={props.global.isTokenSetted}/>
                   }}/>
                 </Switch>
             </AppBlock>
@@ -76,9 +87,16 @@ const mapStateToProps = store => {
   return {
     global: store.global
   }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setToken: (code) => dispatch(setToken(code)),
+    getAuthUrl: () => dispatch(getAuthUrl()),
+  }
 }
   
 //TODO сделать разделение кода + ленивую подгрузуку для компонентов реализовать номрально, как здесь описано https://ru.reactjs.org/docs/code-splitting.html
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
