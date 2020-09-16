@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 //components
 import Picture from '../picture/picture';
 import PhotoCard from '../photo-card/photo-card';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
-import LikesIcon from '../likes/likes-icon';
 
 //styles
 import styled from 'styled-components';
@@ -19,7 +18,12 @@ const Image = styled.img`
 
 const FeedItem = ({id, data}) => {
     const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
-//TODO ComponentDidUpdate()
+
+    //TODO not refresh component if url is not changed
+    useEffect(() => {
+
+    },[url]);
+
     const renderLikes = () => {
         return (
             <Likes countOfLikes={likes} isLiked={liked_by_user}>
