@@ -41,7 +41,8 @@ export function bigPhotoReducer(state = initialState, action) {
                 ...state,
                 bigPhotoData: {
                     ...state.bigPhotoData,
-                    liked_by_user: true
+                    liked_by_user: true,                     //to renew data without request to API
+                    likes: ++state.bigPhotoData.likes
                 }
             }
         case LIKE_PHOTO_FAIL: 
@@ -53,7 +54,8 @@ export function bigPhotoReducer(state = initialState, action) {
                 ...state,
                 bigPhotoData: {
                     ...state.bigPhotoData,
-                    liked_by_user: false
+                    liked_by_user: false,                    //to renew data without request to API
+                    likes: --state.bigPhotoData.likes
                 }
             }
         case UNLIKE_PHOTO_FAIL: 

@@ -58,11 +58,11 @@ const App = (props) => {
                 <Switch>
                   <Route exact path='/auth' component={LogInPage}/>
                   <Route  exact path='/' render={() => {
-                    return <FeedPage token={props.global.token}/>
+                    return <FeedPage token={props.global.token} isTokenSetted={props.global.isTokenSetted}/>
                   }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
-                    return <BigPhotoPage photoId={id} token={props.global.token}/>
+                    return <BigPhotoPage photoId={id} token={props.global.token} isTokenSetted={props.global.isTokenSetted}/>
                   }}/>
                 </Switch>
             </AppBlock>

@@ -36,10 +36,10 @@ class BigPhotoPage extends Component {
     componentDidMount() {
         if (!this.props.token) {
             //TODO make request to get token
-        } else {
+        } else if (!this.props.isTokenSetted){          //if token is not setted, make setToken action
             this.props.setToken(this.props.token);
         }
-        
+
         if (this.props.photoId !== this.props.bigPhoto.id) {
             this.props.clearStore();
         }

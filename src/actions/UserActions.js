@@ -20,8 +20,6 @@ const getToken = (dispatch) => {
                 type: GET_TOKEN_SUCCESS,
             });
 
-            //TODO BREAK can't auth, tesed json and code above 👆
-            //TODO redirect to exact path of home page without refreshing page
             window.location.assign(HOME_URL);
         })
         .catch(e => {

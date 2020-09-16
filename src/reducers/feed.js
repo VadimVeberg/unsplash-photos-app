@@ -1,6 +1,6 @@
 import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS } from '../actions/FeedActions';
 
-import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL  } from '../actions/GlobalActions';
+import { LIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_SUCCESS } from '../actions/BigPhotoActions';
 
 const initialState = {
     photos: {
@@ -60,24 +60,30 @@ export function feedReducer(state = initialState, action) {
                 isFetching: false,
                 error: action.payload.message                
             }
-        case SET_TOKEN_REQUEST:
-            return {
-                ...state,
-                isFetching: true,
-                error: ''
-            }
-        case SET_TOKEN_SUCCESS:
-            return {
-                ...state,
-                isFetching: false,
-            }
-        case SET_TOKEN_FAIL:
-            return {
-                ...state,
-                isFetching: false,
-                error: action.payload
-            }
-        
+        // case LIKE_PHOTO_SUCCESS:
+        //     let index = state.photos.leftColSources.findIndex(photo => photo.id === action.payload);
+
+        //     if (index !== -1) {
+        //         return {
+        //             ...state,
+        //             photos: {
+        //                 leftColSources: !state.photos.leftColSources[index].liked_by_user,
+        //                 rightColSources: [...state.photos.rightColSources]
+        //             }
+        //         }
+        //     } else {
+        //         index = state.photos.rightColSources.findIndex(photo => photo.id === action.payload);
+        //         return {
+        //             ...state,
+        //             photos: {
+        //                 leftColSources: [...state.photos.leftColSources],
+        //                 rightColSources: [...state.photos.rightColSources, state.photos.rightColSources[index]{
+        //                     ...state.photos.rightColSources[index],
+        //                     !state.photos.rightColSources[index].liked_by_user]
+        //                 } 
+        //             }
+        //         }
+        //     }
         default: 
         return state;
     }

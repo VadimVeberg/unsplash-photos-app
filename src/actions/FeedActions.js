@@ -145,10 +145,8 @@ export const getLastPhotos = () => {
 
 //TODO перенести сюда логику с cached, как здесь: https://github.com/maxfarseer/redux-course-ru-v2/blob/chp13-optimize-re-renders/src/actions/PageActions.jsфзз
 
-//TODO make setting of scroll position without dispatching action because of state is updating and requests are sending
 export const rememberScrollPosition = (scrollTop) => {
     return dispatch => {
-        //TODO rename actions to remember scroll position
         dispatch({
             type: REMEMBER_SCROLL_POSITION,
             payload: scrollTop

@@ -2,6 +2,7 @@ import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL  } from '../action
 
 const initialState = {
     token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+    isTokenSetted: false,
     errors: {
         setTokenError: ''
     }
@@ -20,7 +21,8 @@ export function globalReducer(state = initialState, action) {
             }
         case SET_TOKEN_SUCCESS:
             return {
-                ...state
+                ...state,
+                isTokenSetted: true
             }
         case SET_TOKEN_FAIL:
             return {
@@ -28,6 +30,7 @@ export function globalReducer(state = initialState, action) {
                 error: {
                     setTokenError: `Can't set token: ${action.payload}`
                 },
+                isTokenSetted: false
             }
         default: 
         return state;

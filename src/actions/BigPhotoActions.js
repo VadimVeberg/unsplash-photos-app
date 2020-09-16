@@ -93,18 +93,14 @@ export const likePhoto = (id) => {
             type: LIKE_PHOTO_REQUEST
         });
 
+        //TODO make error handling when you like/unlike photo without internet connetion
         unsplash.photos.likePhoto(id)
         .then(res => res.json())
         .then(json => {
             dispatch({
                 type: LIKE_PHOTO_SUCCESS,
+                payload: id
             });
-
-            dispatch({
-                type: GET_BIG_PHOTO_REQUEST
-            });
-        
-            getBigPhotoData(id, dispatch);
         })
         .catch(e => {
             dispatch({
@@ -126,13 +122,9 @@ export const unLikePhoto = (id) => {
         .then(json => {
             dispatch({
                 type: UNLIKE_PHOTO_SUCCESS,
+                payload: id
             });
             
-            dispatch({
-                type: GET_BIG_PHOTO_REQUEST
-            });
-        
-            getBigPhotoData(id, dispatch);
         })
         .catch(e => {
             dispatch({
