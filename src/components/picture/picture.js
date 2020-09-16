@@ -33,9 +33,6 @@ const Picture = React.memo(({color, ratio, ...props}) => {
             <Service ratio={ratio}>
                 <Content> {/* for calcualting height by percent of width*/}
                     {props.children}
-                    {/* <Link to={`/${id}`} src={src}>
-                        <Image src={src} alt={alt}/> 
-                    </Link> */}
                 </Content> 
             </Service>
         </Wrapper>

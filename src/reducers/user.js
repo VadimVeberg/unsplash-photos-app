@@ -1,7 +1,6 @@
-import {USER_LOGIN_REQUEST} from '../actions/UserActions';
-import {USER_LOGIN_SUCCESS} from '../actions/UserActions';
-import {USER_LOGIN_FAIL} from '../actions/UserActions';
-
+import {GET_TOKEN_REQUEST} from '../actions/UserActions';
+import {GET_TOKEN_SUCCESS} from '../actions/UserActions';
+import {GET_TOKEN_FAIL} from '../actions/UserActions';
 
 const initialState = {
     error: '', 
@@ -10,11 +9,11 @@ const initialState = {
   
 export function userReducer(state = initialState, action) {
     switch (action.type) {
-        case USER_LOGIN_REQUEST:
+        case GET_TOKEN_REQUEST:
             return {...state, isFetching: true, error: ''}
-        case USER_LOGIN_SUCCESS:
+        case GET_TOKEN_SUCCESS:
             return {...state, isFetching: false, error: ''}
-        case USER_LOGIN_FAIL:
+        case GET_TOKEN_FAIL:
             return {...state, isFetching: false, error: action.payload}
         default: 
             return state

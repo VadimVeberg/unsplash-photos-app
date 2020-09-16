@@ -28,10 +28,9 @@ const Button = styled.button`
 
 `;
 
-const LikesButton = ({isLiked, likePhoto, unLikePhoto}) => {
+const LikesButton = ({isLiked, likePhoto, unLikePhoto, photoId}) => {
     return (
-        // <Button>
-        <Button onClick={() => isLiked ? unLikePhoto() : likePhoto()}>
+        <Button onClick={() => isLiked ? unLikePhoto(photoId) : likePhoto(photoId)}>
             {isLiked ? 'Не нравится' : 'Нравится'}
         </Button>
     )

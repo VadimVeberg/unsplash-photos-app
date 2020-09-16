@@ -9,6 +9,8 @@ import { Container } from 'reactstrap';
 import { theme } from '../../style_vars';
 //router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+export const history = createBrowserHistory();
 
 const AppContainer = styled(Container)`
   display: flex;
@@ -44,7 +46,7 @@ const AppBlock = styled.div`
 
 const App = (props) => {
   return (
-    <Router>
+    <Router history={history}>
       <ThemeProvider theme={theme}>  {/* making access to global style variables */}
         <AppContainer>
           {/*TODO in Safari border radius of app is blincking*/}

@@ -5,6 +5,12 @@ export const GET_LAST_PHOTOS_REQUEST = 'GET_LAST_PHOTOS_REQUEST';
 export const GET_LAST_PHOTOS_SUCCESS = 'GET_LAST_PHOTOS_SUCCESS';
 export const GET_LAST_PHOTOS_FAIL = 'GET_LAST_PHOTOS_FAIL';
 export const SET_SCROLL_POSITION = 'SET_SCROLL_POSITION';
+export const GET_AUTH_URL_REQUEST = 'GET_AUTH_URL_REQUEST';
+export const GET_AUTH_URL_SUCCESS = 'GET_AUTH_URL_SUCCESS';
+export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
+export const AUTH_REQUEST = 'AUTH_REQUEST';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
 
 let pagecounter = 1;
 let uniqueIDs = [];
@@ -49,7 +55,8 @@ const extractDataFromFeed = (arr) => {
             updated_at,
             color,
             width,
-            height
+            height,
+            liked_by_user
         }) => {
             if (checkID(id)) {
                 photos.push({
@@ -65,7 +72,8 @@ const extractDataFromFeed = (arr) => {
                     preRender: {
                         color,
                         ratio: calcAspectRatio(width, height)
-                    }
+                    },
+                    liked_by_user
                 });
                 uniqueIDs.push(id);
             }
@@ -75,6 +83,60 @@ const extractDataFromFeed = (arr) => {
     }
     return splitDataToColumns(photos);
 };
+
+const getURL = (dispatch) => {
+    try {
+        const authenticationUrl = unsplash.auth.getAuthenticationUrl([
+            "public",
+            "write_likes"
+        ]);
+
+        if (authenticationUrl) {
+            dispatch({
+                type: GET_AUTH_URL_SUCCESS
+            })
+        }
+    
+        //eslint-disable-next-line no-undef
+        window.location.assign(authenticationUrl);
+    } catch (e) {
+        dispatch({
+            type: GET_AUTH_URL_FAIL,
+            payload: e.message
+        });
+    }
+}
+
+export const getAuthUrl= () => {
+    return dispatch => {
+        dispatch({
+            type: GET_AUTH_URL_REQUEST
+        })
+
+        getURL(dispatch);
+    }
+}
+
+export const auth = (token) => {
+    return dispatch => {
+        dispatch({
+            type: AUTH_REQUEST
+        });
+
+        try {
+            unsplash.auth.setBearerToken(token);
+            dispatch({
+                type: AUTH_SUCCESS
+            });
+        }
+        catch (e) {
+            dispatch({
+                type: AUTH_FAIL,
+                payload: e.message
+            });
+        }
+    }
+}
 
 const getPhotos = (pageNumber, dispatch) => {
     unsplash.photos.listPhotos(pageNumber, 10, "latest")
@@ -105,6 +167,7 @@ export const getLastPhotos = () => {
     };
 };
 
+//TODO make setting of scroll position without dispatching action because of state is updating and requests are sending
 export const setScrollPosition = (scrollTop) => {
     return dispatch => {
         console.log('rpo')

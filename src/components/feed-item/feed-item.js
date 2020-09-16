@@ -18,12 +18,11 @@ const Image = styled.img`
 `;
 
 const FeedItem = ({id, data}) => {
-    const {url, alt_description, user, dateAdded, likes, preRender} = data;
+    const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
 
     const renderLikes = () => {
         return (
-            <Likes countOfLikes={likes}>
-                <LikesIcon/>
+            <Likes countOfLikes={likes} isLiked={liked_by_user}>
             </Likes>
         );
     }
@@ -35,7 +34,12 @@ const FeedItem = ({id, data}) => {
                         <Image src={url} alt={alt_description}/> 
                 </Link> 
             </Picture>
-            <PhotoInfo renderLikes={renderLikes} authorLink={user.link} authorName={user.name} dateAdded={dateAdded}/>
+            <PhotoInfo 
+            renderLikes={renderLikes} 
+            authorLink={user.link}
+            authorName={user.name} 
+            dateAdded={dateAdded}
+            isLiked={liked_by_user}/>
         </PhotoCard>
     )
 };

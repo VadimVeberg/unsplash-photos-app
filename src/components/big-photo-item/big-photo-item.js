@@ -23,12 +23,12 @@ const BigPhotoItem = ({data, likePhoto, unLikePhoto}) => {
         return null;
     }
 
-    const {url, alt, user, dateAdded, likes, preRender, liked_by_user} = data;
+    const {id, url, alt, user, dateAdded, likes, preRender, liked_by_user} = data;
 
     const renderLikes = () => {
         return (
-            <Likes countOfLikes={likes}>
-                <LikesButton isLiked={liked_by_user} likePhoto={likePhoto} unLikePhoto={unLikePhoto}/>
+            <Likes countOfLikes={likes} isLiked={liked_by_user}>
+                <LikesButton photoId={id} isLiked={liked_by_user} likePhoto={likePhoto} unLikePhoto={unLikePhoto}/>
             </Likes>
         )
     }

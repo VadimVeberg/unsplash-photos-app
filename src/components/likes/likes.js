@@ -16,12 +16,12 @@ const LikesCount = styled.div`
      }
 `;
 
-const Likes = ({countOfLikes, ...props}) => {
+const Likes = ({countOfLikes, isLiked, ...props}) => {
     return (
         <LikesCount>
             {props.children}
             <span>{countOfLikes}</span> 
-            <LikesIcon/>
+        <LikesIcon isLiked={isLiked}/>
         </LikesCount>
     )
 };

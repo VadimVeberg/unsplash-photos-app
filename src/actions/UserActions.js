@@ -1,39 +1,33 @@
-import { unsplash } from '../utils/unsplash';
+import { unsplash, HOME_URL } from '../utils/unsplash';
 
-export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
-export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
-export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL';
+export const GET_TOKEN_REQUEST = 'GET_TOKEN_REQUEST';
+export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
+export const GET_TOKEN_FAIL = 'GET_TOKEN_FAIL';
 
-const auth = (dispatch) => {
-    const authenticationUrl = unsplash.auth.getAuthenticationUrl([
-        "public",
-        "write_likes"
-    ]);
-
+const getToken = (dispatch) => {
+   
     //eslint-disable-next-line no-undef
     const code = window.location.search.split('code=')[1];
-    // window.location.assign(authenticationUrl);
-
-    //eslint-disable-next-line no-undef
-    // const code = window.location.search.split('code=')[1];
-
-    console.log(code);
     if (code) {
         unsplash.auth.userAuthentication(code)
         .then(res => res.json())
         .then(json => {
 
-            alert(json.access_token);
-            unsplash.auth.setBearerToken(json.access_token);
-
+            console.log(json);
+            console.log(code);
+            localStorage.setItem('token', json.access_token);
             dispatch({
-                type: USER_LOGIN_SUCCESS
+                type: GET_TOKEN_SUCCESS,
             });
+
+            //TODO BREAK can't auth, tesed json and code above 👆
+            //TODO redirect to exact path of home page without refreshing page
+            window.location.assign(HOME_URL);
         })
         .catch(e => {
             dispatch( {
-                type: USER_LOGIN_FAIL,
-                payload: 'Can\'t auth'
+                type: GET_TOKEN_FAIL,
+                payload: e.message
             })
         })
     }
@@ -42,9 +36,9 @@ const auth = (dispatch) => {
 export function handleLogin() {
     return dispatch => {
         dispatch({
-            type: USER_LOGIN_REQUEST
+            type: GET_TOKEN_REQUEST
         })
 
-        auth(dispatch);
+        getToken(dispatch);
     }
 }

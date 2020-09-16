@@ -47,6 +47,8 @@ const extractDataFromBigPhoto = (
         liked_by_user
     }
 }
+//TODO when refreshing page bearerToken is not set, make global action for this 
+
 const getBigPhotoData = (id, dispatch) => {
     unsplash.photos.getPhoto(id)
     .then(res => res.json())
@@ -75,14 +77,19 @@ const likePhotoAction = (id, dispatch) => {
             type: LIKE_PHOTO_SUCCESS,
             payload: json
         });
-      console.log(json);
+
+        dispatch({
+            type: GET_BIG_PHOTO_REQUEST
+        });
+    
+        getBigPhotoData(id, dispatch);
     })
     .catch(e => {
         dispatch({
             type: LIKE_PHOTO_FAIL,
             payload: new Error(e)
         })
-    });
+    }); 
 };
 
 const unLikePhotoAction = (id, dispatch) => {
@@ -93,7 +100,12 @@ const unLikePhotoAction = (id, dispatch) => {
             type: UNLIKE_PHOTO_SUCCESS,
             payload: json
         });
-      console.log(json);
+        
+        dispatch({
+            type: GET_BIG_PHOTO_REQUEST
+        });
+    
+        getBigPhotoData(id, dispatch);
     })
     .catch(e => {
         dispatch({
@@ -137,6 +149,6 @@ export const unLikePhoto = (id) => {
             type: UNLIKE_PHOTO_REQUEST
         });
 
-        likePhotoAction(id, dispatch);
+        unLikePhotoAction(id, dispatch);
     };
 };

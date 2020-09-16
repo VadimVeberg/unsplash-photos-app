@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getLastPhotos, setScrollPosition } from '../../actions/FeedActions';
+import { getAuthUrl, auth, getLastPhotos, setScrollPosition } from '../../actions/FeedActions';
 
 const FeedRow = styled.div`
   display: flex;
@@ -38,13 +38,19 @@ class FeedPage extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.feed.isShowedOnce) {
-      this.props.getLastPhotos();
+    if (!this.props.feed.token) {
+      this.props.getAuthUrl();
+    } else if (!this.props.feed.isShowedOnce) {
+      this.props.auth(this.props.feed.token);
     }
+    this.props.getLastPhotos();
   }
 
+  // componentWillUnmount() {
+  //   this.props.setScrollPosition(e.target.scrollTop);
+  // }
+
   onScrollFeed = (e) => {
-    this.props.setScrollPosition(e.target.scrollTop);
 
     const scrollBottom = e.target.scrollTop + 
     e.target.offsetHeight ===  e.target.scrollHeight;
@@ -63,7 +69,7 @@ class FeedPage extends Component {
       return <FeedItem key={id} id={id} data={props}/>
     })
   }
-
+//TODO after like photo and return to feed like is not seeing on photo
   render() {
     const error = this.props.feed.error ? <UserMessage error={true} text={`Error! Can't load photos`}/> : null;
     
@@ -99,6 +105,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    getAuthUrl: () => dispatch(getAuthUrl()),
+    auth: (code) => dispatch(auth(code)),
     getLastPhotos: () => dispatch(getLastPhotos()),
     setScrollPosition: (scrollTop) => dispatch(setScrollPosition(scrollTop))
   }

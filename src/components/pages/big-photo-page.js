@@ -39,6 +39,7 @@ class BigPhotoPage extends Component {
         this.props.getBigPhoto(this.props.photoId);
     }
 
+    
     render() {
         const error = this.props.bigPhoto.error ? <UserMessage error={true} text={`Error! Can't load photo`}/> : null;
         const loading = this.props.bigPhoto.isFetching ? <Spinner small/> : null;

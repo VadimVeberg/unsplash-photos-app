@@ -9,16 +9,19 @@ const LikesIconSvg = styled.svg`
 
     margin-left: 11px;
 
+    fill: ${props => props.isLiked ? props.theme.red : props.theme.black};
+
     @media (max-width: 576px) {
         width: 12px;    
         height: 12px;
     }
 `;
 
-const LikesIcon = () => {
+const LikesIcon = ({isLiked}) => {
+    console.log(isLiked);
     return (
         <LikesIconSvg version="1.1" id="Capa_1"  x="0px" y="0px"
-            viewBox="0 0 512 512" >
+            viewBox="0 0 512 512" isLiked={isLiked}>
             <g>
                 <path d="M376,30c-27.783,0-53.255,8.804-75.707,26.168c-21.525,16.647-35.856,37.85-44.293,53.268
                 c-8.437-15.419-22.768-36.621-44.293-53.268C189.255,38.804,163.783,30,136,30C58.468,30,0,93.417,0,177.514
