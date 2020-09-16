@@ -33,16 +33,16 @@ const FeedCol = styled.div`
 
 class FeedPage extends Component {
   constructor(props) {
-      super();
+      super(props);
       this.setScrollPosition = this.setScrollPosition.bind(this);
   }
 
   componentDidMount() {
-    if (!this.props.feed.token) {
+    if (!this.props.token) {
       this.props.getAuthUrl();
     } else if (!this.props.feed.isShowedOnce) {
       this.props.getLastPhotos();
-      this.props.auth(this.props.feed.token);
+      this.props.auth(this.props.token);
     }
   }
 

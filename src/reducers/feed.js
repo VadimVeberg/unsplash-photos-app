@@ -8,8 +8,7 @@ const initialState = {
     },
     error: '',
     isFetching: false,
-    isShowedOnce: false, 
-    token: localStorage.getItem('token'),    // to avoid requests when the user returns from big photo to feed
+    isShowedOnce: false,  // to avoid requests when the user returns from big photo to feed
     scrollPosition: 0,
     //TODO remove it if unneccessary
     isScrollPositionSetted: false   // to render component after setting scroll position

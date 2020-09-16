@@ -60,7 +60,9 @@ const App = (props) => {
             <AppBlock>
                 <Switch>
                   <Route exact path='/auth' component={LogInPage}/>
-                  <Route  exact path='/' component={FeedPage}/>
+                  <Route  exact path='/' render={() => {
+                    return <FeedPage token={props.user.token}/>
+                  }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
                     return <BigPhotoPage photoId={id}/>
@@ -73,12 +75,19 @@ const App = (props) => {
   );
 }
 
+const mapStateToProps = store => {
+  return {
+    user: store.user
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     auth: (code) => dispatch(auth(code)),
   }
 }
+
    
-export default connect(mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 

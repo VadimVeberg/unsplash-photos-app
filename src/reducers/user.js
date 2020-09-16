@@ -5,6 +5,7 @@ import {GET_TOKEN_FAIL} from '../actions/UserActions';
 const initialState = {
     error: '', 
     isFetching: false, 
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : null,   
 }
   
 export function userReducer(state = initialState, action) {
