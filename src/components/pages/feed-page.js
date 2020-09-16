@@ -13,7 +13,8 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getAuthUrl, auth, getLastPhotos, rememberScrollPosition } from '../../actions/FeedActions';
+import { getAuthUrl, getLastPhotos, rememberScrollPosition } from '../../actions/FeedActions';
+import { setToken } from '../../actions/GlobalActions';
 
 const FeedRow = styled.div`
   display: flex;
@@ -40,9 +41,9 @@ class FeedPage extends Component {
   componentDidMount() {
     if (!this.props.token) {
       this.props.getAuthUrl();
-    } else if (!this.props.feed.isShowedOnce) {
+  } else if (!this.props.feed.isShowedOnce) {
       this.props.getLastPhotos();
-      this.props.auth(this.props.token);
+      this.props.setToken(this.props.token);
     }
   }
 
@@ -102,8 +103,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    setToken: (code) => dispatch(setToken(code)),
     getAuthUrl: () => dispatch(getAuthUrl()),
-    auth: (code) => dispatch(auth(code)),
     getLastPhotos: () => dispatch(getLastPhotos()),
     rememberScrollPosition: (scrollTop) => dispatch(rememberScrollPosition(scrollTop))
   }

@@ -1,6 +1,5 @@
 import { unsplash } from '../utils/unsplash';
 import { extractDateString, calcAspectRatio } from '../utils/utils';
-import { unstable_batchedUpdates } from 'react-dom';
 
 export const GET_BIG_PHOTO_REQUEST = 'GET_BIG_PHOTO_REQUEST';
 export const GET_BIG_PHOTO_SUCCESS = 'GET_BIG_PHOTO_SUCCESS';
@@ -47,6 +46,7 @@ const extractDataFromBigPhoto = (
         liked_by_user
     }
 }
+
 //TODO when refreshing page bearerToken is not set, make global action for this 
 
 const getBigPhotoData = (id, dispatch) => {
@@ -68,52 +68,6 @@ const getBigPhotoData = (id, dispatch) => {
     })
 
 }
-
-const likePhotoAction = (id, dispatch) => {
-    unsplash.photos.likePhoto(id)
-    .then(res => res.json())
-    .then(json => {
-        dispatch({
-            type: LIKE_PHOTO_SUCCESS,
-            payload: json
-        });
-
-        dispatch({
-            type: GET_BIG_PHOTO_REQUEST
-        });
-    
-        getBigPhotoData(id, dispatch);
-    })
-    .catch(e => {
-        dispatch({
-            type: LIKE_PHOTO_FAIL,
-            payload: new Error(e)
-        })
-    }); 
-};
-
-const unLikePhotoAction = (id, dispatch) => {
-    unsplash.photos.unlikePhoto(id)
-    .then(res => res.json())
-    .then(json => {
-        dispatch({
-            type: UNLIKE_PHOTO_SUCCESS,
-            payload: json
-        });
-        
-        dispatch({
-            type: GET_BIG_PHOTO_REQUEST
-        });
-    
-        getBigPhotoData(id, dispatch);
-    })
-    .catch(e => {
-        dispatch({
-            type: UNLIKE_PHOTO_FAIL,
-            payload: new Error(e)
-        })
-    });
-};
 
 export const getBigPhoto = (id) => {
     return dispatch => {
@@ -139,7 +93,25 @@ export const likePhoto = (id) => {
             type: LIKE_PHOTO_REQUEST
         });
 
-        likePhotoAction(id, dispatch);
+        unsplash.photos.likePhoto(id)
+        .then(res => res.json())
+        .then(json => {
+            dispatch({
+                type: LIKE_PHOTO_SUCCESS,
+            });
+
+            dispatch({
+                type: GET_BIG_PHOTO_REQUEST
+            });
+        
+            getBigPhotoData(id, dispatch);
+        })
+        .catch(e => {
+            dispatch({
+                type: LIKE_PHOTO_FAIL,
+                payload: new Error(e)
+            })
+        }); 
     };
 };
 
@@ -149,6 +121,24 @@ export const unLikePhoto = (id) => {
             type: UNLIKE_PHOTO_REQUEST
         });
 
-        unLikePhotoAction(id, dispatch);
+        unsplash.photos.unlikePhoto(id)
+        .then(res => res.json())
+        .then(json => {
+            dispatch({
+                type: UNLIKE_PHOTO_SUCCESS,
+            });
+            
+            dispatch({
+                type: GET_BIG_PHOTO_REQUEST
+            });
+        
+            getBigPhotoData(id, dispatch);
+        })
+        .catch(e => {
+            dispatch({
+                type: UNLIKE_PHOTO_FAIL,
+                payload: new Error(e)
+            })
+        });
     };
 };

@@ -8,9 +8,6 @@ export const REMEMBER_SCROLL_POSITION = 'REMEMBER_SCROLL_POSITION';
 export const GET_AUTH_URL_REQUEST = 'GET_AUTH_URL_REQUEST';
 export const GET_AUTH_URL_SUCCESS = 'GET_AUTH_URL_SUCCESS';
 export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
-export const AUTH_REQUEST = 'AUTH_REQUEST';
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_FAIL = 'AUTH_FAIL';
 
 let pagecounter = 1;
 let uniqueIDs = [];
@@ -117,27 +114,6 @@ export const getAuthUrl= () => {
     }
 }
 
-export const auth = (token) => {
-    return dispatch => {
-        dispatch({
-            type: AUTH_REQUEST
-        });
-
-        try {
-            unsplash.auth.setBearerToken(token);
-            dispatch({
-                type: AUTH_SUCCESS
-            });
-        }
-        catch (e) {
-            dispatch({
-                type: AUTH_FAIL,
-                payload: e.message
-            });
-        }
-    }
-}
-
 const getPhotos = (pageNumber, dispatch) => {
     unsplash.photos.listPhotos(pageNumber, 10, "latest")
         .then(res => res.json())
@@ -166,6 +142,8 @@ export const getLastPhotos = () => {
         getPhotos(pagecounter++, dispatch);
     };
 };
+
+//TODO перенести сюда логику с cached, как здесь: https://github.com/maxfarseer/redux-course-ru-v2/blob/chp13-optimize-re-renders/src/actions/PageActions.jsфзз
 
 //TODO make setting of scroll position without dispatching action because of state is updating and requests are sending
 export const rememberScrollPosition = (scrollTop) => {

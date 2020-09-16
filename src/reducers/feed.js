@@ -1,5 +1,6 @@
-import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS,
-AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAIL } from '../actions/FeedActions';
+import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS } from '../actions/FeedActions';
+
+import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL  } from '../actions/GlobalActions';
 
 const initialState = {
     photos: {
@@ -10,8 +11,6 @@ const initialState = {
     isFetching: false,
     isShowedOnce: false,  // to avoid requests when the user returns from big photo to feed
     scrollPosition: 0,
-    //TODO remove it if unneccessary
-    isScrollPositionSetted: false   // to render component after setting scroll position
 }
 
 export function feedReducer(state = initialState, action) {
@@ -61,18 +60,18 @@ export function feedReducer(state = initialState, action) {
                 isFetching: false,
                 error: action.payload.message                
             }
-        case AUTH_REQUEST:
+        case SET_TOKEN_REQUEST:
             return {
                 ...state,
                 isFetching: true,
                 error: ''
             }
-        case AUTH_SUCCESS:
+        case SET_TOKEN_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
             }
-        case AUTH_FAIL:
+        case SET_TOKEN_FAIL:
             return {
                 ...state,
                 isFetching: false,

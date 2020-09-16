@@ -12,12 +12,9 @@ import { theme } from '../../style_vars';
 
 //Redux
 import { connect } from 'react-redux';
-import { auth} from '../../actions/FeedActions';
 
 //router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-export const history = createBrowserHistory();
 
 const AppContainer = styled(Container)`
   display: flex;
@@ -53,7 +50,7 @@ const AppBlock = styled.div`
 
 const App = (props) => {
   return (
-    <Router history={history}>
+    <Router>
       <ThemeProvider theme={theme}>  {/* making access to global style variables */}
         <AppContainer>
           {/*TODO in Safari border radius of app is blincking*/}
@@ -61,11 +58,11 @@ const App = (props) => {
                 <Switch>
                   <Route exact path='/auth' component={LogInPage}/>
                   <Route  exact path='/' render={() => {
-                    return <FeedPage token={props.user.token}/>
+                    return <FeedPage token={props.global.token}/>
                   }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
-                    return <BigPhotoPage photoId={id}/>
+                    return <BigPhotoPage photoId={id} token={props.global.token}/>
                   }}/>
                 </Switch>
             </AppBlock>
@@ -77,17 +74,11 @@ const App = (props) => {
 
 const mapStateToProps = store => {
   return {
-    user: store.user
+    global: store.global
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    auth: (code) => dispatch(auth(code)),
-  }
-}
-
-   
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+  
+//TODO сделать разделение кода + ленивую подгрузуку для компонентов реализовать номрально, как здесь описано https://ru.reactjs.org/docs/code-splitting.html
+export default connect(mapStateToProps)(App);
 
 
