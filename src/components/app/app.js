@@ -62,8 +62,7 @@ const App = (props) => {
                     return <FeedPage 
                       setToken={props.setToken}
                       getAuthUrl={props.getAuthUrl}
-                      token={props.global.token} 
-                      isTokenSetted={props.global.isTokenSetted}/>
+                      global={props.global}/>
                   }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
@@ -72,8 +71,7 @@ const App = (props) => {
                       //TODO join a few props to one token={props.global.token} 
                       setToken={props.setToken}
                       getAuthUrl={props.getAuthUrl}
-                      token={props.global.token} 
-                      isTokenSetted={props.global.isTokenSetted}/>
+                      global={props.global}/>
                   }}/>
                 </Switch>
             </AppBlock>

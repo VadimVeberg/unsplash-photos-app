@@ -22,8 +22,6 @@ const FeedRow = styled.div`
   width: 100%;
 `;
 
-//TODO прописать хук componentdidupdate, аргументы - prevProps и prevState 
-
 const FeedCol = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,11 +36,14 @@ class FeedPage extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.token) {
-      this.props.getAuthUrl();
-    } else if (!this.props.feed.isShowedOnce && !this.props.isTokenSetted) {
-      this.props.setToken(this.props.token);
-      this.props.getLastPhotos();
+    const { token, isTokenSetted } = this.props.global;
+    const { getAuthUrl, setToken, getLastPhotos } = this.props;
+
+    if (!token) {
+      getAuthUrl();
+    } else if (!this.props.feed.isShowedOnce && !isTokenSetted) {
+      setToken(token);
+      getLastPhotos();
     }
   }
 

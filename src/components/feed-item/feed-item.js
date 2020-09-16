@@ -19,7 +19,7 @@ const Image = styled.img`
 
 const FeedItem = ({id, data}) => {
     const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
-
+//TODO ComponentDidUpdate()
     const renderLikes = () => {
         return (
             <Likes countOfLikes={likes} isLiked={liked_by_user}>
