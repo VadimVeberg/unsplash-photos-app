@@ -41,10 +41,10 @@ class BigPhotoPage extends Component {
         } else if (!isTokenSetted) {          //if token is not setted, make setToken action
             setToken(token);
         }
-
-        if (this.props.photoId !== this.props.bigPhoto.id) {
+        if (this.props.bigPhoto.bigPhotoData.id !== this.props.photoId) {
             this.props.clearStore();
         }
+
         this.props.getBigPhoto(this.props.photoId);
     }
 
@@ -63,6 +63,7 @@ class BigPhotoPage extends Component {
                 <AppContent>
                     <BigPhotoItem
                         data={this.props.bigPhoto.bigPhotoData}
+                        id={this.props.photoId}
                         likePhoto={this.props.likePhoto}
                         unLikePhoto={this.props.unLikePhoto}/>
                     <LoadingStatus>

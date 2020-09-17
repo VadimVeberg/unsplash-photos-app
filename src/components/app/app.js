@@ -68,7 +68,6 @@ const App = (props) => {
                     const {id} = match.params;
                     return <BigPhotoPage 
                       photoId={id} 
-                      //TODO join a few props to one token={props.global.token} 
                       setToken={props.setToken}
                       getAuthUrl={props.getAuthUrl}
                       global={props.global}/>

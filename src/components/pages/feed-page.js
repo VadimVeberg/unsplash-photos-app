@@ -41,8 +41,10 @@ class FeedPage extends Component {
 
     if (!token) {
       getAuthUrl();
-    } else if (!this.props.feed.isShowedOnce && !isTokenSetted) {
+    } else if (!isTokenSetted) {
       setToken(token);
+    }
+    if (!this.props.feed.isShowedOnce) {
       getLastPhotos();
     }
   }

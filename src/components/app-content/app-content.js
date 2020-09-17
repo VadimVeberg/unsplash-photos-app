@@ -21,8 +21,6 @@ const ContentField = styled.div`
     }
 `;
 
-//TODO make horizontal big photo no-sroll - remove padding
-//TODO make scroll bar not hide by app-header
 const Content = styled.div`
     display: flex;
     justify-content: center;

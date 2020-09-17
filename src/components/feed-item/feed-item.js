@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 //components
 import Picture from '../picture/picture';
 import PhotoCard from '../photo-card/photo-card';
@@ -16,13 +16,11 @@ const Image = styled.img`
     height: 100%;
 `;
 
+
 const FeedItem = ({id, data}) => {
     const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
 
     //TODO not refresh component if url is not changed
-    useEffect(() => {
-
-    },[url]);
 
     const renderLikes = () => {
         return (
@@ -30,10 +28,10 @@ const FeedItem = ({id, data}) => {
             </Likes>
         );
     }
-    
+
     return (
         <PhotoCard>
-            <Picture color={preRender.color} ratio={preRender.ratio}>
+            <Picture color={preRender.color} ratio={preRender.ratio} id={id}>
                 <Link to={`/${id}`} src={url}>
                         <Image src={url} alt={alt_description}/> 
                 </Link> 

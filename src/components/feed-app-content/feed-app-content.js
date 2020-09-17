@@ -31,25 +31,3 @@ export default class FeedAppContent extends Component  {
     }
 };
 
-//TODO clean excess code here and in the top
-// const FeedAppContent = ({onScrollFeed, setScrollPosition, rememberScrollPosition, ...props}) => {
-//     const appContentElement = useRef(null);
-
-//     useEffect(() => {
-//         if (setScrollPosition) {
-//             setScrollPosition(appContentElement);
-//         }
-//     }, [])
-
-//     return  (
-//         <AppContent 
-//         onScrollFeed={onScrollFeed} 
-//         props={props} 
-//         appContentElement={appContentElement}
-//         >
-//             {props.children}
-//         </AppContent>
-//     )
-// };
-
-// export default FeedAppContent;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 //components
 import Picture from '../picture/picture';
@@ -18,12 +18,17 @@ const Image = styled.img`
     height: 100%;
 `;
 
-const BigPhotoItem = ({data, likePhoto, unLikePhoto}) => {
+const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
+    
+    useEffect(() => {
+
+    }, [id]);
+
     if (isEmpty(data)) {
         return null;
     }
 
-    const {id, url, alt, user, dateAdded, likes, preRender, liked_by_user} = data;
+    const {url, alt, user, dateAdded, likes, preRender, liked_by_user} = data;
 
     const renderLikes = () => {
         return (
@@ -34,7 +39,7 @@ const BigPhotoItem = ({data, likePhoto, unLikePhoto}) => {
     }
 
     return (
-        <PhotoCard width={(preRender.ratio > 100) ? '60%' : '90%'}>
+    <PhotoCard width={(preRender.ratio > 100) ? '75%' : '95%'}>
             <Picture  src={url}  color={preRender.color} ratio={preRender.ratio}>
                 <Image src={url} alt={alt}/> 
             </Picture>

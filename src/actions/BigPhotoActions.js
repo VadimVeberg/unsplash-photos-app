@@ -47,8 +47,6 @@ const extractDataFromBigPhoto = (
     }
 }
 
-//TODO when refreshing page bearerToken is not set, make global action for this 
-
 const getBigPhotoData = (id, dispatch) => {
     unsplash.photos.getPhoto(id)
     .then(res => res.json())
