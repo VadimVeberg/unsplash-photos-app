@@ -33,14 +33,7 @@ class BigPhotoPage extends Component {
     }
 
     componentDidMount() {
-        const { token, isTokenSetted } = this.props.global;
-        const { getAuthUrl, setToken } = this.props;
             // TODO make destructurization to remove THIS anywhere
-        if (!token) {
-            getAuthUrl();
-        } else if (!isTokenSetted) {          //if token is not setted, make setToken action
-            setToken(token);
-        }
         if (this.props.bigPhoto.bigPhotoData.id !== this.props.photoId) {
             this.props.clearStore();
         }

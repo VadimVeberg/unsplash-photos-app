@@ -17,7 +17,7 @@ const AppHeaderContainer = styled.div`
     background-color: ${props => props.theme.darkWhite};
     z-index: 1;
     box-shadow: 0px -5px 11px gray;
-    opacity: .8;
+    opacity: .9;
 
     @supports (backdrop-filter: blur(15px)) or (--webkit-backdrop-filter: blur(15px)) {
         backdrop-filter: blur(15px);
@@ -32,6 +32,7 @@ const AppHeaderContainer = styled.div`
     }
 `;
 
+ //TODO remove opacity 
 const AppIcon = styled.svg`
     height: 35px;
     width: 35px;

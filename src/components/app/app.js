@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 //Components
 import LogInPage from '../pages/log-in-page';
@@ -48,8 +48,24 @@ const AppBlock = styled.div`
       border-radius: 0;
   }
 `;
+//TODO prop types
+//TODO token in session storage
+const App = ({global: {token, isTokenSetted} , setToken, getAuthUrl}) => {
 
-const App = (props) => {
+  useEffect(() => {
+    userAuth();
+    console.log('test');
+  }, []);
+
+  const userAuth = () => {
+    if (!token) {
+      getAuthUrl();
+    } else if (!isTokenSetted) {
+      setToken(token);
+    }
+  };
+  //TODO layout on mobile devices
+
   return (
     <Router>
       <ThemeProvider theme={theme}>  {/* making access to global style variables */}
@@ -59,18 +75,12 @@ const App = (props) => {
                 <Switch>
                   <Route exact path='/auth' component={LogInPage}/>
                   <Route  exact path='/' render={() => {
-                    return <FeedPage 
-                      setToken={props.setToken}
-                      getAuthUrl={props.getAuthUrl}
-                      global={props.global}/>
+                    return <FeedPage />
                   }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
                     return <BigPhotoPage 
-                      photoId={id} 
-                      setToken={props.setToken}
-                      getAuthUrl={props.getAuthUrl}
-                      global={props.global}/>
+                    photoId={id}/>
                   }}/>
                 </Switch>
             </AppBlock>

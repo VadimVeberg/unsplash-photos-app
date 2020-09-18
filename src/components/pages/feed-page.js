@@ -36,14 +36,8 @@ class FeedPage extends Component {
   }
 
   componentDidMount() {
-    const { token, isTokenSetted } = this.props.global;
-    const { getAuthUrl, setToken, getLastPhotos } = this.props;
+    const { getLastPhotos } = this.props;
 
-    if (!token) {
-      getAuthUrl();
-    } else if (!isTokenSetted) {
-      setToken(token);
-    }
     if (!this.props.feed.isShowedOnce) {
       getLastPhotos();
     }
@@ -81,6 +75,7 @@ class FeedPage extends Component {
           rememberScrollPosition={this.props.rememberScrollPosition}>
             <FeedRow>
               <FeedCol >
+          {console.log('RENDER')}
                   {this.renderItems(this.props.feed.photos.leftColSources)}
               </FeedCol>
               <FeedCol>

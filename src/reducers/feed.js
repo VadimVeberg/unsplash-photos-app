@@ -1,4 +1,5 @@
 import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION } from '../actions/FeedActions';
+import { LIKE_PHOTO_SUCCESS } from '../actions/BigPhotoActions';
 
 const initialState = {
     photos: {
@@ -10,6 +11,21 @@ const initialState = {
     isShowedOnce: false,  // to avoid requests when the user returns from big photo to feed
     scrollPosition: 0,
 }
+
+//TODO оптимизация масштаба и фото на мобильных телефонах
+// const createStoreWithLikedPhoto = ({photos: { leftColSources, rightColSources }}, {payload}) => {
+    //TODO after like photo and refreshiing page like is not displaying (при том, что реально лайк стоит)
+const createStoreWithLikedPhoto = ({photos}, {payload}) => {
+    const photoId = payload;
+    console.log(photoId, photos);
+    // let index = leftColSources.findIndex(photo => photo.id === photoId);
+    // console.log(index);
+
+    // if ()){
+
+    // }
+
+};
 
 export function feedReducer(state = initialState, action) {
     switch (action.type) {
@@ -41,6 +57,10 @@ export function feedReducer(state = initialState, action) {
                 ...state,
                 scrollPosition: action.payload
             }
+        case LIKE_PHOTO_SUCCESS:
+            // console.log(a);
+            const photos = createStoreWithLikedPhoto(state, action);
+            return state
         // case LIKE_PHOTO_SUCCESS:
         //     let index = state.photos.leftColSources.findIndex(photo => photo.id === action.payload);
 
