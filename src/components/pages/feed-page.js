@@ -13,8 +13,9 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getLastPhotos, rememberScrollPosition } from '../../actions/FeedActions';
-
+import { getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition } from '../../actions/FeedActions';
+import { unsplash } from '../../utils/unsplash';
+ 
 const FeedRow = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -29,25 +30,45 @@ const FeedCol = styled.div`
   width: 45%;
 `;
 
+//TODO убрать черные куски фона под фото ( из-за тени)
 class FeedPage extends Component {
   constructor(props) {
       super(props);
       this.setScrollPosition = this.setScrollPosition.bind(this);
+      this.pageCounter = 1;
   }
 
   componentDidMount() {
-    const { getLastPhotos } = this.props;
-
+    console.log('monute');
     if (!this.props.feed.isShowedOnce) {
-      getLastPhotos();
+      this.getLastPhotos();
     }
   }
 
+  getLastPhotos = () => {
+    const { getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail } = this.props;
+    getLastPhotosRequest();
+    unsplash.photos.listPhotos(this.pageCounter++, 10, "latest")
+    .then(res => res.json())
+      .then(json => {
+        getLastPhotosSuccess(json);
+      })
+      .catch((e) => {
+          setTimeout(() => {
+              getLastPhotosFail(e);
+          }, 200);
+      });
+  };
+
   onScrollFeed = (e) => {
-    const scrollBottom = e.target.scrollTop + 
-    e.target.offsetHeight ===  e.target.scrollHeight;
+    const scrollBottom = e.target.scrollHeight === 
+      e.target.scrollTop + (e.target.offsetHeight - 200);
+
+      console.log(scrollBottom);
     if (scrollBottom) {
-      this.props.getLastPhotos();
+      // this.getLastPhotos();
+      console.log(scrollBottom);
+      
     }
   }
 
@@ -61,6 +82,7 @@ class FeedPage extends Component {
       return <FeedItem key={id} id={id} data={props}/>
     })
   }
+
 //TODO after like photo and return to feed like is not seeing on photo
   render() {
     const error = this.props.feed.error ? <UserMessage error={true} text={`Error! Can't load photos`}/> : null;
@@ -75,7 +97,6 @@ class FeedPage extends Component {
           rememberScrollPosition={this.props.rememberScrollPosition}>
             <FeedRow>
               <FeedCol >
-          {console.log('RENDER')}
                   {this.renderItems(this.props.feed.photos.leftColSources)}
               </FeedCol>
               <FeedCol>
@@ -100,7 +121,9 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLastPhotos: () => dispatch(getLastPhotos()),
+    getLastPhotosRequest: () => dispatch(getLastPhotosRequest()),
+    getLastPhotosSuccess: (json) => dispatch(getLastPhotosSuccess(json)),
+    getLastPhotosFail: (e) => dispatch(getLastPhotosFail(e)),
     rememberScrollPosition: (scrollTop) => dispatch(rememberScrollPosition(scrollTop))
   }
 }

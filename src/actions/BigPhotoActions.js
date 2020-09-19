@@ -17,7 +17,7 @@ const extractDataFromBigPhoto = (
         id,
         alt_description,
         likes,
-        urls: {full},
+        urls: {regular},
         user: {
             first_name,
             links: {html}
@@ -33,7 +33,7 @@ const extractDataFromBigPhoto = (
         id,
         alt: alt_description ? alt_description : '',
         likes,
-        url: full,
+        url: regular,
         user: {
             name: first_name,
             link: html

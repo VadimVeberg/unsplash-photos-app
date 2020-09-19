@@ -31,6 +31,7 @@ const FeedItem = ({id, data}) => {
 
     return (
         <PhotoCard>
+        {console.log('RENDER')}
             <Picture color={preRender.color} ratio={preRender.ratio} id={id}>
                 <Link to={`/${id}`} src={url}>
                         <Image src={url} alt={alt_description}/> 

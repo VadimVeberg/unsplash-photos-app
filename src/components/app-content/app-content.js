@@ -32,7 +32,7 @@ const Content = styled.div`
     padding-bottom: 20px;
 `;
 
-const AppContent = ({onScrollFeed, setScrollPosition, appContentElement, ...props}) => {
+const AppContent = ({onScrollFeed, appContentElement, ...props}) => {
     return (
         <ContentField
         onScroll={onScrollFeed ? e => onScrollFeed(e) : null} ref={appContentElement}>

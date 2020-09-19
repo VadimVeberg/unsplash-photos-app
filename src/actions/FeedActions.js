@@ -6,7 +6,7 @@ export const GET_LAST_PHOTOS_SUCCESS = 'GET_LAST_PHOTOS_SUCCESS';
 export const GET_LAST_PHOTOS_FAIL = 'GET_LAST_PHOTOS_FAIL';
 export const REMEMBER_SCROLL_POSITION = 'REMEMBER_SCROLL_POSITION';
 
-let pagecounter = 1;
+export let pageCounter = 1;
 let uniqueIDs = [];
 
 const checkID = (id) => {
@@ -78,7 +78,7 @@ const extractDataFromFeed = (arr) => {
     return splitDataToColumns(photos);
 };
 
-const getPhotos = (pageNumber, dispatch) => {
+export const getPhotos = (pageNumber, dispatch) => {
     unsplash.photos.listPhotos(pageNumber, 10, "latest")
         .then(res => res.json())
         .then(json => {
@@ -97,15 +97,32 @@ const getPhotos = (pageNumber, dispatch) => {
         });
 };
 
-export const getLastPhotos = () => {
+export const getLastPhotosRequest = () => {
     return dispatch => {
         dispatch({
             type: GET_LAST_PHOTOS_REQUEST
         });
-
-        getPhotos(pagecounter++, dispatch);
     };
 };
+
+export const getLastPhotosSuccess = (json) => {
+    return dispatch => {
+        dispatch( {
+            type: GET_LAST_PHOTOS_SUCCESS,
+            payload: extractDataFromFeed(json)
+        });
+    }
+};
+
+export const getLastPhotosFail = (e) => {
+    return dispatch => {
+        dispatch({
+            type: GET_LAST_PHOTOS_FAIL,
+            payload: new Error(e)
+        });
+    }
+};
+
 
 //TODO перенести сюда логику с cached, как здесь: https://github.com/maxfarseer/redux-course-ru-v2/blob/chp13-optimize-re-renders/src/actions/PageActions.jsфзз
 
