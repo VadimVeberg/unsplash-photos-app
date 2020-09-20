@@ -40,8 +40,11 @@ class FeedPage extends Component {
   }
 
   componentDidMount() {
-    console.log('monute');
+    console.log('monut');
     if (!this.props.feed.isShowedOnce) {
+      //TODO BREAK method above break list of photos, maybe because of old token in app
+      //TODO make error handling if token is invalid
+      this.props.userAuth();
       this.getLastPhotos();
     }
   }
@@ -62,7 +65,7 @@ class FeedPage extends Component {
   };
 
   onScrollFeed = (e) => {
-    const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 900);
+    const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 1200);
 
     if (scrollBottom && !this.props.feed.isFetching && !this.props.feed.error) { //to allow multiple requests
       this.getLastPhotos();
@@ -97,7 +100,6 @@ class FeedPage extends Component {
     return this.props.feed.error ? error : null;
   }
 
-//TODO after like photo and return to feed like is not seeing on photo
 //TODO make destructurization to avoid THIS anywhere
   render() {
     const loading = this.props.feed.isFetching ? <Spinner small/> : null;

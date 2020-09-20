@@ -1,4 +1,5 @@
 import { unsplash } from '../utils/unsplash';
+import { useCallback } from 'react';
 
 export const SET_TOKEN_REQUEST = 'SET_TOKEN_REQUEST';
 export const SET_TOKEN_SUCCESS = 'SET_TOKEN_SUCCESS';

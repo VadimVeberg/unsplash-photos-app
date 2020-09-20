@@ -52,18 +52,14 @@ const AppBlock = styled.div`
 //TODO token in session storage
 const App = ({global: {token, isTokenSetted} , setToken, getAuthUrl}) => {
 
-  useEffect(() => {
-    userAuth();
-    console.log('test');
-  }, []);
-
-  const userAuth = () => {
+  const userAuth = (callback) => {
     if (!token) {
       getAuthUrl();
     } else if (!isTokenSetted) {
-      setToken(token);
+      setToken(token, callback);
     }
   };
+
   //TODO layout on mobile devices
 
   return (
@@ -75,12 +71,13 @@ const App = ({global: {token, isTokenSetted} , setToken, getAuthUrl}) => {
                 <Switch>
                   <Route exact path='/auth' component={LogInPage}/>
                   <Route  exact path='/' render={() => {
-                    return <FeedPage />
+                    return <FeedPage userAuth={userAuth}/>
                   }}/>
                   <Route exact path='/:id' render={({match}) => {
                     const {id} = match.params;
                     return <BigPhotoPage 
-                    photoId={id}/>
+                            userAuth={userAuth}
+                            photoId={id}/>
                   }}/>
                 </Switch>
             </AppBlock>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 //components
 import AppContent from '../app-content/app-content';
 
+//TODO rewrite all app using react hooks
 export default class FeedAppContent extends Component  {
     constructor(props) {
         super(props);

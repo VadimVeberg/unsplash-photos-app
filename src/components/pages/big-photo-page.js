@@ -31,13 +31,13 @@ class BigPhotoPage extends Component {
     constructor(props) {
         super();
     }
-
+//TODO make async api call in hook
     componentDidMount() {
             // TODO make destructurization to remove THIS anywhere
         if (this.props.bigPhoto.bigPhotoData.id !== this.props.photoId) {
             this.props.clearStore();
-        }
-
+        } 
+        this.props.userAuth();
         this.props.getBigPhoto(this.props.photoId);
     }
 
