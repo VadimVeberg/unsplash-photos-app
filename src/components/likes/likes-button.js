@@ -25,7 +25,6 @@ const Button = styled.button`
         background-color:  ${props => props.theme.black};
         border: 1px solid ${props => props.theme.white};
     }
-
 `;
 
 const LikesButton = ({isLiked, likePhoto, unLikePhoto, photoId}) => {

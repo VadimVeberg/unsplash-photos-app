@@ -5,6 +5,7 @@ import AppHeader from '../app-header/app-header';
 import FeedAppContent from '../feed-app-content/feed-app-content';
 import FeedItem from '../feed-item/feed-item';
 import UserMessage from '../userMessage/userMessage';
+import Button from '../button/button';
 import Spinner from '../spinner/spinner';
 import LoadingStatus from '../loading-status/loading-status';
 
@@ -61,18 +62,13 @@ class FeedPage extends Component {
   };
 
   onScrollFeed = (e) => {
-    const scrollBottom = e.target.scrollHeight === 
-      e.target.scrollTop + (e.target.offsetHeight - 200);
+    const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 900);
 
-      console.log(scrollBottom);
-    if (scrollBottom) {
-      // this.getLastPhotos();
-      console.log(scrollBottom);
-      
+    if (scrollBottom && !this.props.feed.isFetching && !this.props.feed.error) { //to allow multiple requests
+      this.getLastPhotos();
     }
-  }
+  };
 
-  //TODO make scroll not scrobbling when user returns to previous page
   setScrollPosition(ref) {
     ref.current.scrollTop = this.props.feed.scrollPosition;
   }
@@ -83,14 +79,32 @@ class FeedPage extends Component {
     })
   }
 
+  renderError = () => {
+    const error = (
+      <>
+        <UserMessage 
+        error={true} 
+        text={`Error while loading photos`}>
+        </UserMessage>
+        <Button
+        onClick={this.getLastPhotos}
+        color={'red'}
+        margin={'7px 0 0'}>
+          Try again
+        </Button> 
+      </>);
+
+    return this.props.feed.error ? error : null;
+  }
+
 //TODO after like photo and return to feed like is not seeing on photo
+//TODO make destructurization to avoid THIS anywhere
   render() {
-    const error = this.props.feed.error ? <UserMessage error={true} text={`Error! Can't load photos`}/> : null;
-    
     const loading = this.props.feed.isFetching ? <Spinner small/> : null;
     return (
       <>
           <AppHeader/>
+          {/*TODO make usecontxt for sroollfeed props e.t.c*/}
           <FeedAppContent 
           onScrollFeed={this.onScrollFeed} 
           setScrollPosition={this.setScrollPosition}
@@ -105,7 +119,7 @@ class FeedPage extends Component {
             </FeedRow>
             <LoadingStatus>
               {loading}
-              {error}
+              {this.renderError()}
             </LoadingStatus>
           </FeedAppContent>
       </>

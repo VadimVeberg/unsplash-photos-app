@@ -57,10 +57,13 @@ export function feedReducer(state = initialState, action) {
                 ...state,
                 scrollPosition: action.payload
             }
-        case LIKE_PHOTO_SUCCESS:
+        //TODO make function below
+        // case LIKE_PHOTO_SUCCESS:
             // console.log(a);
-            const photos = createStoreWithLikedPhoto(state, action);
-            return state
+            // const photos = createStoreWithLikedPhoto(state, action);
+            // return state
+
+
         // case LIKE_PHOTO_SUCCESS:
         //     let index = state.photos.leftColSources.findIndex(photo => photo.id === action.payload);
 
