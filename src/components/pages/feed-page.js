@@ -42,7 +42,7 @@ class FeedPage extends Component {
   componentDidMount() {
     console.log('monut');
     if (!this.props.feed.isShowedOnce) {
-      //TODO BREAK method above break list of photos, maybe because of old token in app
+      console.log('async call');
       //TODO make error handling if token is invalid
       this.props.userAuth();
       this.getLastPhotos();
