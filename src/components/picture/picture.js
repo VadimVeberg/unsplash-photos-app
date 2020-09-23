@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
         width: 100%;
-
-        background-color: ${props => props.color}; 
+    /*TODO break here*/
+        /* background-color: ${props => props.color};  */
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 1px 1px 15px -8px ${props => props.theme.gray};

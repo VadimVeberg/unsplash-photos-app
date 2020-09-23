@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 
 //Components
 import AppHeader from '../app-header/app-header';
@@ -31,25 +31,28 @@ const FeedCol = styled.div`
   width: 45%;
 `;
 
-let pageCounter = 1;
-
 //TODO убрать черные куски фона под фото ( из-за тени)
-const FeedPage = ({feed, userAuth, getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition}) => {
-  
-  useEffect(() => {
-    if (!feed.isShowedOnce) {
-      //TODO make error handling if token is invalid
-      userAuth();
-      getLastPhotos();
-    }
-  }, []);
+class FeedPage extends Component {
+  constructor(props) {
+      super(props);
+      this.setScrollPosition = this.setScrollPosition.bind(this);
+      this.pageCounter = 1;
+  }
 
-//TODO favicon
-//TODO handling 403 error, when requests limit exced
-//TODO с телефона не открываются ссылки в приложении и очень мелкий шрифт 
-  const getLastPhotos = () => {
+  componentDidMount() {
+    console.log('monut');
+    if (!this.props.feed.isShowedOnce) {
+      console.log('async call');
+      //TODO make error handling if token is invalid
+      this.props.userAuth();
+      this.getLastPhotos();
+    }
+  }
+
+  getLastPhotos = () => {
+    const { getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail } = this.props;
     getLastPhotosRequest();
-    unsplash.photos.listPhotos(++pageCounter, 10, "latest")
+    unsplash.photos.listPhotos(this.pageCounter++, 10, "latest")
     .then(res => res.json())
       .then(json => {
         getLastPhotosSuccess(json);
@@ -61,25 +64,25 @@ const FeedPage = ({feed, userAuth, getLastPhotosRequest, getLastPhotosSuccess, g
       });
   };
 
-  const onScrollFeed = (e) => {
+  onScrollFeed = (e) => {
     const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 1200);
 
-    if (scrollBottom && !feed.isFetching && !feed.error) { //to allow multiple requests
-      getLastPhotos();
+    if (scrollBottom && !this.props.feed.isFetching && !this.props.feed.error) { //to allow multiple requests
+      this.getLastPhotos();
     }
   };
 
-  const setScrollPosition = (ref) => {
-    ref.current.scrollTop = feed.scrollPosition;
+  setScrollPosition(ref) {
+    ref.current.scrollTop = this.props.feed.scrollPosition;
   }
 
-  const renderItems = (arr) => {
+  renderItems(arr) {
     return arr.map(({id, ...props}) => {
       return <FeedItem key={id} id={id} data={props}/>
     })
   }
 
-  const renderError = () => {
+  renderError = () => {
     const error = (
       <>
         <UserMessage 
@@ -87,42 +90,43 @@ const FeedPage = ({feed, userAuth, getLastPhotosRequest, getLastPhotosSuccess, g
         text={`Error while loading photos`}>
         </UserMessage>
         <Button
-        onClick={getLastPhotos}
+        onClick={this.getLastPhotos}
         color={'red'}
         margin={'7px 0 0'}>
           Try again
         </Button> 
       </>);
 
-    return feed.error ? error : null;
+    return this.props.feed.error ? error : null;
   }
 
 //TODO make destructurization to avoid THIS anywhere
-  const loading = feed.isFetching ? <Spinner small/> : null;
-
+  render() {
+    const loading = this.props.feed.isFetching ? <Spinner small/> : null;
     return (
       <>
           <AppHeader/>
           {/*TODO make usecontxt for sroollfeed props e.t.c*/}
           <FeedAppContent 
-          onScrollFeed={onScrollFeed} 
-          setScrollPosition={setScrollPosition}
-          rememberScrollPosition={rememberScrollPosition}>
+          onScrollFeed={this.onScrollFeed} 
+          setScrollPosition={this.setScrollPosition}
+          rememberScrollPosition={this.props.rememberScrollPosition}>
             <FeedRow>
               <FeedCol >
-                  {renderItems(feed.photos.leftColSources)}
+                  {this.renderItems(this.props.feed.photos.leftColSources)}
               </FeedCol>
               <FeedCol>
-                  {renderItems(feed.photos.rightColSources)}
+                  {this.renderItems(this.props.feed.photos.rightColSources)}
               </FeedCol>
             </FeedRow>
             <LoadingStatus>
               {loading}
-              {renderError()}
+              {this.renderError()}
             </LoadingStatus>
           </FeedAppContent>
       </>
     );
+  }
 }
 
 const mapStateToProps = store => {

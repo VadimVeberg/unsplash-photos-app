@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 //Components
 import LogInPage from '../pages/log-in-page';

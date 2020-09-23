@@ -6,7 +6,6 @@ export const GET_LAST_PHOTOS_SUCCESS = 'GET_LAST_PHOTOS_SUCCESS';
 export const GET_LAST_PHOTOS_FAIL = 'GET_LAST_PHOTOS_FAIL';
 export const REMEMBER_SCROLL_POSITION = 'REMEMBER_SCROLL_POSITION';
 
-export let pageCounter = 1;
 let uniqueIDs = [];
 
 const checkID = (id) => {
