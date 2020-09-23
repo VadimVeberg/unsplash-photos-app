@@ -1,6 +1,8 @@
 import { unsplash } from '../utils/unsplash';
-import { useCallback } from 'react';
 
+ //this global actions allows  authorize from any page of app:
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
 export const SET_TOKEN_REQUEST = 'SET_TOKEN_REQUEST';
 export const SET_TOKEN_SUCCESS = 'SET_TOKEN_SUCCESS';
 export const SET_TOKEN_FAIL = 'SET_TOKEN_FAIL';
@@ -8,7 +10,19 @@ export const GET_AUTH_URL_REQUEST = 'GET_AUTH_URL_REQUEST';
 export const GET_AUTH_URL_SUCCESS = 'GET_AUTH_URL_SUCCESS';
 export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
 
- //this global actions allows  authorize from any page of app:
+export const logIn = () => {
+    sessionStorage.setItem('isLogged', true);
+    return {
+        type: LOG_IN
+    }
+}
+
+export const logOut = () => {
+    sessionStorage.setItem('isLogged', false);
+    return {
+        type: LOG_OUT
+    }
+}
  
 export const setToken = (token) => {   
     return dispatch => {
@@ -31,7 +45,7 @@ export const setToken = (token) => {
     }
 };
 
-export const getAuthUrl= () => {
+export const getAuthUrl = () => {
     return dispatch => {
         dispatch({
             type: GET_AUTH_URL_REQUEST

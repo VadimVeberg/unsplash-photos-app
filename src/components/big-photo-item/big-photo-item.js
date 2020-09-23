@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 //components
 import Picture from '../picture/picture';
@@ -6,6 +6,9 @@ import PhotoCard from '../photo-card/photo-card';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
 import LikesButton from '../likes/likes-button';
+
+//context 
+import UserContext from '../../contexts/userContext';
 
 //styles 
 import styled from 'styled-components';
@@ -19,10 +22,7 @@ const Image = styled.img`
 `;
 
 const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
-    
-    useEffect(() => {
-
-    }, [id]);
+    const { isLogged } = useContext(UserContext);
 
     if (isEmpty(data)) {
         return null;
@@ -33,7 +33,7 @@ const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
     const renderLikes = () => {
         return (
             <Likes countOfLikes={likes} isLiked={liked_by_user}>
-                <LikesButton photoId={id} isLiked={liked_by_user} likePhoto={likePhoto} unLikePhoto={unLikePhoto}/>
+                {isLogged === true && <LikesButton photoId={id} isLiked={liked_by_user} likePhoto={likePhoto} unLikePhoto={unLikePhoto}/>}
             </Likes>
         )
     }

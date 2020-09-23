@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 //Components
 import AppHeader from '../app-header/app-header';
@@ -8,6 +8,9 @@ import UserMessage from '../userMessage/userMessage';
 import Button from '../button/button';
 import Spinner from '../spinner/spinner';
 import LoadingStatus from '../loading-status/loading-status';
+
+//context
+import UserContext from '../../contexts/userContext';
 
 //styles 
 import styled from 'styled-components';
@@ -34,15 +37,23 @@ const FeedCol = styled.div`
 let pageCounter = 1;
 
 //TODO убрать черные куски фона под фото ( из-за тени)
-const FeedPage = ({feed, userAuth, getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition}) => {
-  
+const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition}) => {
+  const { isLogged, userAuth } = useContext(UserContext);
+
   useEffect(() => {
     if (!feed.isShowedOnce) {
       //TODO make error handling if token is invalid
-      userAuth();
-      getLastPhotos();
+      if (isLogged === true) {
+        userAuth();
+      }
+      getLastPhotos();    //get request AFTER setting token/auth
     }
+    console.log('monut');
   }, []);
+
+  useEffect(() => {
+    console.log('updating');
+  }, [feed])
 
 //TODO favicon
 //TODO handling 403 error, when requests limit exced
@@ -87,9 +98,14 @@ const FeedPage = ({feed, userAuth, getLastPhotosRequest, getLastPhotosSuccess, g
         text={`Error while loading photos`}>
         </UserMessage>
         <Button
-        onClick={getLastPhotos}
-        color={'red'}
-        margin={'7px 0 0'}>
+          onClick={getLastPhotos}
+          options={{
+            color: 'red',
+            bgColor: 'white',
+            margin: '7px 0 0',
+            hoverColor: 'white',
+            hoverBgColor: 'red'
+        }}>
           Try again
         </Button> 
       </>);

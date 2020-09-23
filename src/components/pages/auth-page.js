@@ -7,9 +7,9 @@ import LoadingStatus from '../loading-status/loading-status';
 import styled from 'styled-components';
 //redux
 import { connect } from 'react-redux';
-import { handleLogin } from '../../actions/UserActions';
+import { getToken } from '../../actions/UserActions';
 
-const LogInPageWrapper = styled.div`
+const AuthPageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,21 +19,21 @@ const LogInPageWrapper = styled.div`
   font-size: 35px;
 `;
 
-const LogInPage = ({user: {error, isFetching}, handleLogin}) => {
+const AuthPage = ({user: {error, isFetching}, getToken}) => {
   useEffect(() => {
-    handleLogin();
+    getToken();
   }, []);
   
   const errorMessage = error ? <UserMessage error={true} text={`Error! ${error}`}/> : null,
     spinner = isFetching ? <Spinner/> : null;
 
   return (
-    <LogInPageWrapper>
+    <AuthPageWrapper>
       <LoadingStatus>
         {errorMessage}
         {spinner}
       </LoadingStatus>
-    </LogInPageWrapper>
+    </AuthPageWrapper>
   );
 }
 
@@ -45,9 +45,9 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleLogin: () => dispatch(handleLogin())
+        getToken: () => dispatch(getToken())
     }
 };
 
    
-export default connect(mapStateToProps, mapDispatchToProps)(LogInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);

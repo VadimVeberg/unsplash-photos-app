@@ -1,8 +1,7 @@
 import { GET_BIG_PHOTO_REQUEST, GET_BIG_PHOTO_SUCCESS, GET_BIG_PHOTO_FAIL, CLEAR_STORE, LIKE_PHOTO_REQUEST, LIKE_PHOTO_SUCCESS, LIKE_PHOTO_FAIL, UNLIKE_PHOTO_REQUEST, UNLIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_FAIL } from '../actions/BigPhotoActions';
 
 const initialState = {
-    bigPhotoData: {
-    },
+    bigPhotoData: {},
     error: '',
     isFetching: false,
 }

@@ -6,10 +6,11 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
         width: 100%;
-    /*TODO break here*/
-        /* background-color: ${props => props.color};  */
-        border-radius: 10px;
+
         overflow: hidden;
+
+        background-color: ${props => props.color}; 
+        border-radius: 10px;
         box-shadow: 1px 1px 15px -8px ${props => props.theme.gray};
 `;
 
@@ -27,6 +28,7 @@ const Content = styled.div`
         left: 0;
 `;
 
+//TODO useMemo !
 const Picture = React.memo(({color, ratio, ...props}) => {
     return (
         <Wrapper color={color}>

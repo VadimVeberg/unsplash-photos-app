@@ -1,18 +1,43 @@
-import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS  } from '../actions/GlobalActions';
+import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS, LOG_IN, LOG_OUT } from '../actions/GlobalActions';
+
+const getLogInStatus = () => {
+    if (sessionStorage.getItem('isLogged') === 'true') {
+        return true;
+    } else if (sessionStorage.getItem('isLogged') === 'false') {
+        return false;
+    } else {
+        return null;
+    }
+};
 
 const initialState = {
-    token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+    token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : null,
     isTokenSetted: false,
     errors: {
         getAuthUrlError: '',
         setTokenError: '',
-    }
+    },
+    isLogged: getLogInStatus(),
+    // isLogged: false - guest mode  
+    // isLogged: null - must suggest authorization 
+    // isLogged: true - get and set token
 }
 
-//TODO make visual messages for auth
+//TODO make visual msessages for auth
 
 export function globalReducer(state = initialState, action) {
     switch (action.type) {
+        case LOG_IN: 
+            return {
+                ...state,
+                isLogged: true
+            }
+        case LOG_OUT: 
+            return {
+                ...state,
+                isLogged: false
+            }
+
         case SET_TOKEN_REQUEST:
             return {                
                 ...state,

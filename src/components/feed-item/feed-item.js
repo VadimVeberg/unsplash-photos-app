@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 //components
 import Picture from '../picture/picture';
 import PhotoCard from '../photo-card/photo-card';
@@ -21,6 +21,10 @@ const FeedItem = ({id, data}) => {
     const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
 
     //TODO not refresh component if url is not changed
+//TODO clear this?
+    useEffect(() => {
+        // console.log('picture update');
+    }, [id]);
 
     const renderLikes = () => {
         return (

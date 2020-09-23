@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 //Components
-import LogInPage from '../pages/log-in-page';
+import LogInWindow from '../logInWindow/logInWindow';
+import AuthPage from '../pages/auth-page';
 import FeedPage from '../pages/feed-page';
 import BigPhotoPage from '../pages/big-photo-page';
+
+//context
+import UserContext from '../../contexts/userContext';
 
 //styles
 import styled, { ThemeProvider } from 'styled-components';
@@ -12,7 +16,7 @@ import { theme } from '../../style_vars';
 
 //Redux
 import { connect } from 'react-redux';
-import { setToken, getAuthUrl } from '../../actions/GlobalActions';
+import { logIn, logOut, setToken, getAuthUrl } from '../../actions/GlobalActions';
 
 //router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -50,17 +54,23 @@ const AppBlock = styled.div`
 `;
 //TODO prop types
 //TODO token in session storage
-const App = ({global: {token, isTokenSetted} , setToken, getAuthUrl}) => {
+const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken, getAuthUrl}) => {
 
-  const userAuth = (callback) => {
-    if (!token) {
-      getAuthUrl();
-    } else if (!isTokenSetted) {
-      setToken(token, callback);
-    }
+  const userAuth = () => {
+      if (!token) {
+        getAuthUrl();
+      } else if (!isTokenSetted) {
+        setToken(token);
+      }
   };
+  
+  const user = {
+    isLogged,
+    userAuth
+  }
 
   //TODO layout on mobile devices
+  const loginWindow = isLogged === null ? <LogInWindow logIn={logIn} logOut={logOut}/> : null;
 
   return (
     <Router>
@@ -68,18 +78,19 @@ const App = ({global: {token, isTokenSetted} , setToken, getAuthUrl}) => {
         <AppContainer>
           {/*TODO in Safari border radius of app is blincking*/}
             <AppBlock>
-                <Switch>
-                  <Route exact path='/auth' component={LogInPage}/>
-                  <Route  exact path='/' render={() => {
-                    return <FeedPage userAuth={userAuth}/>
-                  }}/>
-                  <Route exact path='/:id' render={({match}) => {
-                    const {id} = match.params;
-                    return <BigPhotoPage 
-                            userAuth={userAuth}
-                            photoId={id}/>
-                  }}/>
-                </Switch>
+                {loginWindow}
+                { isLogged !== null &&
+                    <UserContext.Provider value={user}>    {/* allows to get global user login/out data in every page or component */}
+                      <Switch>
+                        <Route exact path='/auth' component={AuthPage}/>
+                        <Route exact path='/' component={FeedPage}/>
+                        <Route exact path='/:id' render={({match}) => {
+                          const {id} = match.params;
+                          return <BigPhotoPage photoId={id}/>
+                        }}/>
+                    </Switch>
+                    </UserContext.Provider>
+                }
             </AppBlock>
         </AppContainer> 
       </ThemeProvider>
@@ -95,6 +106,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    logIn: () => dispatch(logIn()),
+    logOut: () => dispatch(logOut()),
     setToken: (code) => dispatch(setToken(code)),
     getAuthUrl: () => dispatch(getAuthUrl()),
   }

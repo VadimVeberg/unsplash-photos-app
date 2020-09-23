@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 //Components
 import AppHeader from '../app-header/app-header';
@@ -8,6 +8,9 @@ import UserMessage from '../userMessage/userMessage';
 import Spinner from '../spinner/spinner';
 import LoadingStatus from '../loading-status/loading-status';
 import UndoButton from '../undo-button/undo-button';
+
+//context 
+import UserContext from '../../contexts/userContext';
 
 //styles
 import styled from 'styled-components';
@@ -27,48 +30,44 @@ const UndoLink = styled(Link)`
     height: 45px;
 `;
 
-class BigPhotoPage extends Component {
-    constructor(props) {
-        super();
-    }
-//TODO make async api call in hook
-    componentDidMount() {
-            // TODO make destructurization to remove THIS anywhere
-        if (this.props.bigPhoto.bigPhotoData.id !== this.props.photoId) {
-            this.props.clearStore();
-        } 
-        this.props.userAuth();
-        this.props.getBigPhoto(this.props.photoId);
-    }
+const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, unLikePhoto}) => {
+    const { bigPhotoData } = bigPhoto;
+    const { isLogged, userAuth } = useContext(UserContext);
 
-    
-    render() {
-        const error = this.props.bigPhoto.error ? <UserMessage error={true} text={`Error! Can't load photo`}/> : null;
-        const loading = this.props.bigPhoto.isFetching ? <Spinner small/> : null;
-        
-        return (
-            <>
-                <AppHeader>
-                    <UndoLink to='/'>
-                        <UndoButton/>
-                    </UndoLink>
-                </AppHeader>
-                <AppContent>
-                    <BigPhotoItem
-                        data={this.props.bigPhoto.bigPhotoData}
-                        id={this.props.photoId}
-                        likePhoto={this.props.likePhoto}
-                        unLikePhoto={this.props.unLikePhoto}/>
-                    <LoadingStatus>
-                        {loading}
-                        {error}
-                    </LoadingStatus>
-                </AppContent>
-            </>
-        );
-    }
-    
-}
+    useEffect(() => {
+        if (bigPhotoData.id !== photoId) {
+            clearStore();
+        } 
+        if (isLogged === true) {
+            userAuth();
+        }
+        getBigPhoto(photoId);  //get request AFTER setting token/auth
+    }, []);
+
+    const error = bigPhoto.error ? <UserMessage error={true} text={`Error! Can't load photo`}/> : null;
+    const loading = bigPhoto.isFetching ? <Spinner small/> : null;
+
+    return (
+        <>
+            <AppHeader>
+                <UndoLink to='/'>
+                    <UndoButton/>
+                </UndoLink>
+            </AppHeader>
+            <AppContent>
+                <BigPhotoItem
+                    data={bigPhotoData}
+                    id={photoId}
+                    likePhoto={likePhoto}
+                    unLikePhoto={unLikePhoto}/>
+                <LoadingStatus>
+                    {loading}
+                    {error}
+                </LoadingStatus>
+            </AppContent>
+        </>
+    )
+};
 
 const mapStateToProps = store => {
     return {
@@ -76,13 +75,13 @@ const mapStateToProps = store => {
     }
   }
   
-  const mapDispatchToProps = dispatch => {
-    return {
-        getBigPhoto: id => dispatch(getBigPhoto(id)),
-        clearStore: () => dispatch(clearStore()),
-        likePhoto: (id) => dispatch(likePhoto(id)),
-        unLikePhoto: (id) => dispatch(unLikePhoto(id))
-    }
-  }
+const mapDispatchToProps = dispatch => {
+return {
+    getBigPhoto: id => dispatch(getBigPhoto(id)),
+    clearStore: () => dispatch(clearStore()),
+    likePhoto: (id) => dispatch(likePhoto(id)),
+    unLikePhoto: (id) => dispatch(unLikePhoto(id))
+}
+}
 
-export default  connect(mapStateToProps, mapDispatchToProps)(BigPhotoPage)
+export default connect(mapStateToProps, mapDispatchToProps)(BigPhotoPage);
