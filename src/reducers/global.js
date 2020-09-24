@@ -1,9 +1,9 @@
 import { SET_TOKEN_REQUEST, SET_TOKEN_SUCCESS, SET_TOKEN_FAIL, GET_AUTH_URL_REQUEST, GET_AUTH_URL_FAIL, GET_AUTH_URL_SUCCESS, LOG_IN, LOG_OUT } from '../actions/GlobalActions';
 
 const getLogInStatus = () => {
-    if (sessionStorage.getItem('isLogged') === 'true') {
+    if (localStorage.getItem('isLogged') === 'true') {
         return true;
-    } else if (sessionStorage.getItem('isLogged') === 'false') {
+    } else if (localStorage.getItem('isLogged') === 'false') {
         return false;
     } else {
         return null;
@@ -11,7 +11,7 @@ const getLogInStatus = () => {
 };
 
 const initialState = {
-    token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : null,
+    token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
     isTokenSetted: false,
     errors: {
         getAuthUrlError: '',

@@ -17,7 +17,7 @@ export function getToken() {
             unsplash.auth.userAuthentication(code)
             .then(res => res.json())
             .then(json => {
-                sessionStorage.setItem('token', json.access_token);
+                localStorage.setItem('token', json.access_token);
                 dispatch({
                     type: GET_TOKEN_SUCCESS,
                 });

@@ -20,7 +20,7 @@ const FadeInBlock = styled.div`
     height: auto;
     position: relative;
 
-    animation: .13s ${fadeIn} ease-in;
+    animation: .18s ${fadeIn} ease-in;
 `;
 
 const Image = styled.img`

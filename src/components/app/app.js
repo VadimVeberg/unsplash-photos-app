@@ -53,7 +53,6 @@ const AppBlock = styled.div`
   }
 `;
 //TODO prop types
-//TODO token in session storage
 const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken, getAuthUrl}) => {
 
   const userAuth = () => {

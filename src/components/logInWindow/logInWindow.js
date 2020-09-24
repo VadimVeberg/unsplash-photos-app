@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
 //components
-import LogInButton from '../logInButton/logInButton';
+import LogActionButton from '../logActionButton/logActionButton';
 
 //context 
 import UserContext from '../../contexts/userContext';
@@ -39,7 +39,7 @@ const LogInWindow = () => {
     return (
         <ModalOverlay>
                 <Title>Do you have Unsplash account?</Title>
-                <LogInButton />
+                <LogActionButton type={'login'}/>
                 <Link
                 onClick={(e) => {
                     e.preventDefault();

@@ -11,15 +11,16 @@ export const GET_AUTH_URL_SUCCESS = 'GET_AUTH_URL_SUCCESS';
 export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
 
 export const logIn = () => {
-    sessionStorage.setItem('isLogged', true);
-    
+    localStorage.setItem('isLogged', true);
+
     return {
         type: LOG_IN
     }
 }
 
 export const logOut = () => {
-    sessionStorage.setItem('isLogged', false);
+    localStorage.setItem('isLogged', false);
+    localStorage.removeItem('token');
     return {
         type: LOG_OUT
     }

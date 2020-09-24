@@ -41,22 +41,27 @@ const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhot
   const { isLogged, userAuth } = useContext(UserContext);
 
   useEffect(() => {
+    //TODO write async logic back in actions
+    console.log('monut');
     if (!feed.isShowedOnce) {
       //TODO make error handling if token is invalid
       if (isLogged === true) {
         userAuth();
-        getLastPhotos();
+        getLastPhotos(); //get request AFTER setting token/auth
       } else {
         getLastPhotos();
       }
-          //get request AFTER setting token/auth
     }
-    console.log('monut');
   }, []);
 
   useEffect(() => {            //when global state is updating and component receive new value of isLogged prop (when user clicks on LogIn Button)
     if (isLogged === true) {
       userAuth();
+    } else if (isLogged === false) {
+      console.log('logout');
+      // clearFeedStore();
+      pageCounter = 1
+      getLastPhotos();
     }
   }, [isLogged]);
 
