@@ -5,7 +5,7 @@ import Button from '../button/button';
 
 //context 
 import UserContext from '../../contexts/userContext';
-
+//TODO smaller button in app header on small screens
 const LogInButton = () => {
     const { logIn } = useContext(UserContext);
 

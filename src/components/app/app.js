@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 //Components
 import LogInWindow from '../logInWindow/logInWindow';
@@ -72,6 +72,7 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
     logOut
   }
 
+  
   //TODO layout on mobile devices
   const loginWindow = isLogged === null ? <LogInWindow/> : null;
 

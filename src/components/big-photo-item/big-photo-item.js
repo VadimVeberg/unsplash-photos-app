@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 
 //components
-import Picture from '../picture/picture';
+import BackgroundField from '../backgroundField/backgroundField';
 import PhotoCard from '../photo-card/photo-card';
+import Picture from '../picture/picture';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
 import LikesButton from '../likes/likes-button';
@@ -15,11 +16,6 @@ import styled from 'styled-components';
 
 //utils
 import { isEmpty } from '../../utils/utils';
-
-const Image = styled.img`
-    width: 100%;
-    height: 100%;
-`;
 
 const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
     const { isLogged } = useContext(UserContext);
@@ -40,9 +36,11 @@ const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
 
     return (
     <PhotoCard width={(preRender.ratio > 100) ? '75%' : '95%'}>
-            <Picture  src={url}  color={preRender.color} ratio={preRender.ratio}>
-                <Image src={url} alt={alt}/> 
-            </Picture>
+            <Picture 
+            color={preRender.color} 
+            ratio={preRender.ratio}
+            src={url} 
+            alt={alt}/>
             <PhotoInfo
                 renderLikes={renderLikes}
                 authorLink={user.link}

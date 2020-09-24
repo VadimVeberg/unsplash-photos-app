@@ -38,7 +38,7 @@ let pageCounter = 1;
 
 //TODO убрать черные куски фона под фото ( из-за тени)
 const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition}) => {
-  const { isLogged, isTokenSetted, userAuth } = useContext(UserContext);
+  const { isLogged, userAuth } = useContext(UserContext);
 
   useEffect(() => {
     if (!feed.isShowedOnce) {

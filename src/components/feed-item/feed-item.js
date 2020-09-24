@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
+import React from 'react';
 //components
-import Picture from '../picture/picture';
+import BackgroundField from '../backgroundField/backgroundField';
 import PhotoCard from '../photo-card/photo-card';
+import Picture from '../picture/picture';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
 
@@ -11,22 +12,21 @@ import styled from 'styled-components';
 //router
 import { Link } from 'react-router-dom';
 
-const Image = styled.img`
-    width: 100%;
-    height: 100%;
-`;
-
-const Overlay = styled.div`
+const LinkDiv = styled(Link)`
     position: absolute;
     top: 0;
+
+    display: block;
     width: 100%;
-    height: 100%;
+
+    padding-bottom: ${props => props.ratio}%;
+
+    z-index: 20;
 `;
 
 const FeedItem = ({id, data}) => {
     const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
 
-    //TODO not refresh component if url is not changed
     const renderLikes = () => {
         return (
             <Likes countOfLikes={likes} isLiked={liked_by_user}>
@@ -34,16 +34,17 @@ const FeedItem = ({id, data}) => {
         );
     }
     
-
     return (
         <PhotoCard>
         {console.log('RENDER')}
-            <Picture color={preRender.color} ratio={preRender.ratio} id={id}>
-                        <Image src={url} alt={alt_description}/> 
-                        <Link to={`/${id}`} src={url}>
-                            <Overlay/>
-                        </Link>
+            <Picture 
+            color={preRender.color} 
+            ratio={preRender.ratio}
+            src={url} 
+            alt={alt_description}>
+                <LinkDiv ratio={preRender.ratio} to={`/${id}`} src={url}/>
             </Picture>
+
             <PhotoInfo 
             renderLikes={renderLikes} 
             authorLink={user.link}

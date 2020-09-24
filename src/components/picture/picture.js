@@ -1,44 +1,44 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
+//components
+import BackgroundField from '../backgroundField/backgroundField';
 
 //styles
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
+const fadeIn = keyframes`
+  0% {
+    opacity: .2;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
-const Wrapper = styled.div`
-        width: 100%;
+const FadeInBlock = styled.div`
+    width: 100%;
+    height: auto;
+    position: relative;
 
-        overflow: hidden;
-
-        background-color: ${props => props.color}; 
-        border-radius: 10px;
-        box-shadow: 1px 1px 15px -8px ${props => props.theme.gray};
+    animation: .13s ${fadeIn} ease-in;
 `;
 
-const Service = styled.div`
-        position: relative;
-        height: 0;
-        padding-bottom: ${props => props.ratio}%;
+const Image = styled.img`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 10px;
 `;
 
-const Content = styled.div`
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-`;
 
-//TODO useMemo !
-const Picture = React.memo(({color, ratio, ...props}) => {
+const Picture = ({color, ratio, src, alt, ...props}) => {
     return (
-        <Wrapper color={color}>
-            <Service ratio={ratio}>
-                <Content> {/* for calcualting height by percent of width*/}
-                    {props.children}
-                </Content> 
-            </Service>
-        </Wrapper>
+        <FadeInBlock>
+            <BackgroundField color={color} ratio={ratio}/>   
+            <Image src={src} alt={alt}/> 
+                {props.children}
+        </FadeInBlock>
     )
-});
+};
 
 export default Picture;
