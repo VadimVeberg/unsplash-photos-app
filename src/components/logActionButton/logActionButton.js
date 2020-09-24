@@ -6,17 +6,19 @@ import Button from '../button/button';
 //context 
 import UserContext from '../../contexts/userContext';
 //TODO smaller button in app header on small screensf 
-const LogActionButton = ({type}) => {
+const LogActionButton = ({type, size}) => {
     const { logIn, logOut } = useContext(UserContext);
 
     return (
         <Button
+        //TODO make button change color according type
             options={{
-                color: 'green',
+                color: type === 'login' ? 'green' : type === 'logout' ? 'red' : null,
                 bgColor: 'white',
                 hoverColor: 'white',
-                hoverBgColor: 'green',
-                margin: '20px 0 20px'
+                hoverBgColor: type === 'login' ? 'green' : type === 'logout' ? 'red' : null,
+                margin: '20px 0 20px',
+                padding: size === 'small' ? '2px 7px' : '7px 12px'
             }}
             onClick={() => {
                 if (type === 'login') {

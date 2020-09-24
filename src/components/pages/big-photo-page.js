@@ -44,12 +44,6 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
         getBigPhoto(photoId);  //get request AFTER setting token/auth
     }, []);
 //TODO make photos not loading while authorization
-    useEffect(() => {            //when global state is updating and component receive new value of isLogged prop (when user clicks on LogIn Button)
-        if (isLogged === true) {
-          userAuth();
-        }
-      }, [isLogged]);
-    
 
     const renderError = (errorType, description) => {
         return errorType ? <UserMessage error={true} text={`Error! Can't ${description} photo`}/> : null;

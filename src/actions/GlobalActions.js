@@ -3,6 +3,7 @@ import { unsplash } from '../utils/unsplash';
  //this global actions allows  authorize from any page of app:
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
+export const CLEAR_STORE = 'CLEAR_STORE';
 export const SET_TOKEN_REQUEST = 'SET_TOKEN_REQUEST';
 export const SET_TOKEN_SUCCESS = 'SET_TOKEN_SUCCESS';
 export const SET_TOKEN_FAIL = 'SET_TOKEN_FAIL';
@@ -25,7 +26,7 @@ export const logOut = () => {
         type: LOG_OUT
     }
 }
- 
+
 export const setToken = (token) => {   
     return dispatch => {
         dispatch({

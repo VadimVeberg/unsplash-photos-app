@@ -1,6 +1,5 @@
 import React from 'react';
 //components
-import BackgroundField from '../backgroundField/backgroundField';
 import PhotoCard from '../photo-card/photo-card';
 import Picture from '../picture/picture';
 import PhotoInfo from '../photo-info/photo-info';

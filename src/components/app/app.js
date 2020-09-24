@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 //Components
 import LogInWindow from '../logInWindow/logInWindow';
@@ -54,7 +54,17 @@ const AppBlock = styled.div`
 `;
 //TODO prop types
 const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken, getAuthUrl}) => {
+  const isInitialMount = useRef(false);
 
+  useEffect(() => {
+    if (isInitialMount.current) {    //imitating ComponentDidUpdate()
+      //eslint-disable-next-line no-undef
+      window.location.reload(false);
+    } else {
+      isInitialMount.current = true;
+    }
+  }, [isLogged]);
+  
   const userAuth = () => {
       if (!token) {
         getAuthUrl();
@@ -70,9 +80,7 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
     logIn,
     logOut
   }
-
   
-  //TODO layout on mobile devices
   const loginWindow = isLogged === null ? <LogInWindow/> : null;
 
   return (
@@ -81,12 +89,14 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
         <UserContext.Provider value={user}>    {/* allows to get global user login/out data in every page or component */}
           <AppContainer>
             {/*TODO in Safari border radius of app is blincking*/}
-              <AppBlock>
+              <AppBlock >
                 {loginWindow}
                 { isLogged !== null &&
                   <Switch>
                     <Route exact path='/auth' component={AuthPage}/>
-                    <Route exact path='/' component={FeedPage}/>
+                    <Route exact path='/' render={() => {
+                      return <FeedPage/>
+                      }}/>
                     <Route exact path='/:id' render={({match}) => {
                       const {id} = match.params;
                       return <BigPhotoPage photoId={id}/>

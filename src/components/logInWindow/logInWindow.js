@@ -39,7 +39,7 @@ const LogInWindow = () => {
     return (
         <ModalOverlay>
                 <Title>Do you have Unsplash account?</Title>
-                <LogActionButton type={'login'}/>
+                <LogActionButton type={'login'} size={'big'}/>
                 <Link
                 onClick={(e) => {
                     e.preventDefault();

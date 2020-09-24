@@ -1,33 +1,28 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 //components
 import AppContent from '../app-content/app-content';
 
-//TODO rewrite all app using react hooks
-export default class FeedAppContent extends Component  {
-    constructor(props) {
-        super(props);
-        this.appContentElement = React.createRef();
-    }
+const appContentElement = React.createRef();
 
-    componentDidMount() {
-        this.props.setScrollPosition(this.appContentElement);
-    }
+const FeedAppContent = ({setScrollPosition, rememberScrollPosition, onScrollFeed, ...props}) => {
 
-    componentWillUnmount() {
-        this.props.rememberScrollPosition(this.appContentElement.current.scrollTop);
-    }
+    useEffect(() => {
+        setScrollPosition(appContentElement);
+        return function cleanup() {
+            rememberScrollPosition(appContentElement.current.scrollTop);
+        }
+    }, []);
 
-    render() {
-        const { onScrollFeed, ...props } = this.props;
-        return  (
-            <AppContent 
+    return (
+        <AppContent 
             onScrollFeed={onScrollFeed} 
-            appContentElement={this.appContentElement}
+            appContentElement={appContentElement}
             props={props}>
-                    {this.props.children}
-            </AppContent>
-        )
-    }
-};
+                    {props.children}
+        </AppContent>
+    )
+}
+
+export default FeedAppContent;
 

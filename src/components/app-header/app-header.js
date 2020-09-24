@@ -23,12 +23,12 @@ const AppHeaderContainer = styled.div`
     background-color: ${props => props.theme.darkWhite};
     z-index: 1;
     box-shadow: 0px -5px 11px gray;
-    opacity: .9;
+    /* opacity: .9; */
 
-    @supports (backdrop-filter: blur(15px)) or (--webkit-backdrop-filter: blur(15px)) {
+    /* @supports (backdrop-filter: blur(15px)) or (--webkit-backdrop-filter: blur(15px)) {
         backdrop-filter: blur(15px);
         --webkit-backdrop-filter: blur(15px);
-    }
+    } */
 
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -66,8 +66,8 @@ const AppHeader = (props) => {
                 V51z M52,47h-2V11h2v2v32V47z M56,43h-2V15h2V43z"/>
             </AppIcon>
             <ButtonWrapper>
-                {isLogged === false && <LogActionButton type={'login'}/>}
-                {isLogged === true && <LogActionButton type={'logout'}/>}
+                {isLogged === false && <LogActionButton type={'login'} size={'small'}/>}
+                {isLogged === true && <LogActionButton type={'logout'} size={'small'}/>}
             </ButtonWrapper>
         </AppHeaderContainer>
     )

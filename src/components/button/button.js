@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Btn = styled.button`
     display: block;
     margin: ${props => props.margin};
-    padding: 7px 12px;
+    padding: ${props => props.padding};
 
     border: 1px solid  ${props => props.theme[props.color]};
     color:  ${props => props.theme[props.color]};
@@ -27,11 +27,13 @@ const Btn = styled.button`
         background-color:  ${props => props.theme[props.hoverBgColor]};
         border: 1px solid ${props => props.theme[props.hoverBgColor]};
     }
+
+    @media (max-width: 576px) {
+        font-size: 12px;
+    }
 `;
 
-const Button = ({options = {color: 'red', bgColor: 'white', hoverColor: 'white', hoverBgColor: 'red', margin: '',}, onClick, ...props}) => {
-    const {color, bgColor, hoverColor, hoverBgColor, margin} = options;
-    
+const Button = ({options : {color = 'red', bgColor = 'white', hoverColor = 'white', hoverBgColor = 'red', margin = '', padding = ' 7px 12px'}, onClick, ...props}) => {
     return (
         <Btn 
         onClick={onClick} 
@@ -39,7 +41,8 @@ const Button = ({options = {color: 'red', bgColor: 'white', hoverColor: 'white',
         bgColor={bgColor}
         hoverColor={hoverColor}
         hoverBgColor={hoverBgColor}
-        margin={margin ? margin : ''}>
+        margin={margin}
+        padding={padding}>
             {props.children}
         </Btn>
     )

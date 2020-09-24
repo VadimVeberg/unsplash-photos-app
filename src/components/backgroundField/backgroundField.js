@@ -9,10 +9,8 @@ const Wrapper = styled.div`
 
         background-color: ${props => props.color}; 
         border-radius: 10px;
-        transform: scale(.97);
-        /* box-shadow: 1px 1px 15px -8px ${props => props.theme.gray}; */
+        transform: scale(.97); 
 `;
-//TODO correct box-shadow
 
 const BackgroundField = ({color, ratio}) => {
     return (

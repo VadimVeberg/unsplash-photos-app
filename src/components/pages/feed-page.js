@@ -17,8 +17,7 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition } from '../../actions/FeedActions';
-import { unsplash } from '../../utils/unsplash';
+import { getLastPhotos, rememberScrollPosition } from '../../actions/FeedActions';
  
 const FeedRow = styled.div`
   display: flex;
@@ -34,14 +33,10 @@ const FeedCol = styled.div`
   width: 45%;
 `;
 
-let pageCounter = 1;
-
-//TODO убрать черные куски фона под фото ( из-за тени)
-const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition}) => {
+const FeedPage = ({feed, getLastPhotos, rememberScrollPosition}) => {
   const { isLogged, userAuth } = useContext(UserContext);
 
   useEffect(() => {
-    //TODO write async logic back in actions
     console.log('monut');
     if (!feed.isShowedOnce) {
       //TODO make error handling if token is invalid
@@ -54,34 +49,10 @@ const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhot
     }
   }, []);
 
-  useEffect(() => {            //when global state is updating and component receive new value of isLogged prop (when user clicks on LogIn Button)
-    if (isLogged === true) {
-      userAuth();
-    } else if (isLogged === false) {
-      console.log('logout');
-      // clearFeedStore();
-      pageCounter = 1
-      getLastPhotos();
-    }
-  }, [isLogged]);
 
 //TODO favicon
 //TODO handling 403 error, when requests limit exced
 //TODO с телефона не открываются ссылки в приложении и очень мелкий шрифт 
-  const getLastPhotos = () => {
-    getLastPhotosRequest();
-    unsplash.photos.listPhotos(++pageCounter, 10, "latest")
-    .then(res => res.json())
-      .then(json => {
-        getLastPhotosSuccess(json);
-      })
-      .catch((e) => {
-          setTimeout(() => {
-              getLastPhotosFail(e);
-          }, 200);
-      });
-  };
-
   const onScrollFeed = (e) => {
     const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 1200);
 
@@ -123,13 +94,11 @@ const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhot
     return feed.error ? error : null;
   }
 
-//TODO make destructurization to avoid THIS anywhere
   const loading = feed.isFetching ? <Spinner small/> : null;
 
     return (
       <>
           <AppHeader/>
-          {/*TODO make usecontxt for sroollfeed props e.t.c*/}
           <FeedAppContent 
           onScrollFeed={onScrollFeed} 
           setScrollPosition={setScrollPosition}
@@ -159,9 +128,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLastPhotosRequest: () => dispatch(getLastPhotosRequest()),
-    getLastPhotosSuccess: (json) => dispatch(getLastPhotosSuccess(json)),
-    getLastPhotosFail: (e) => dispatch(getLastPhotosFail(e)),
+    getLastPhotos: () => dispatch(getLastPhotos()),
     rememberScrollPosition: (scrollTop) => dispatch(rememberScrollPosition(scrollTop))
   }
 }

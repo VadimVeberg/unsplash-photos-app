@@ -31,11 +31,22 @@ const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
             <Likes countOfLikes={likes} isLiked={liked_by_user}>
                 {isLogged === true && <LikesButton photoId={id} isLiked={liked_by_user} likePhoto={likePhoto} unLikePhoto={unLikePhoto}/>}
             </Likes>
-        )
+        );
+    }
+
+    const calcPhotoWidth = () => {
+        const isMobileDevice = document.documentElement.clientWidth < 576;
+    
+        const scales = {
+            vertical: isMobileDevice ? '95%' : '75%',
+            horizontal: '95%'
+        }
+
+        return preRender.ratio > 100 ? scales.vertical : scales.horizontal
     }
 
     return (
-    <PhotoCard width={(preRender.ratio > 100) ? '75%' : '95%'}>
+    <PhotoCard width={calcPhotoWidth()}>
             <Picture 
             color={preRender.color} 
             ratio={preRender.ratio}

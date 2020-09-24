@@ -8,6 +8,8 @@ export const REMEMBER_SCROLL_POSITION = 'REMEMBER_SCROLL_POSITION';
 
 let uniqueIDs = [];
 
+let pageCounter = 1;
+
 const checkID = (id) => {
     if (uniqueIDs.some(uniqueID => id === uniqueID)) {    //if some of ids is not unique
         return false;
@@ -33,7 +35,6 @@ const splitDataToColumns = (arr) => {
 };
 
 //TODO make columns same height
-
 const extractDataFromFeed = (arr) => {
     const photos = [];
     arr.map(({
@@ -77,53 +78,30 @@ const extractDataFromFeed = (arr) => {
     return splitDataToColumns(photos);
 };
 
-export const getPhotos = (pageNumber, dispatch) => {
-    unsplash.photos.listPhotos(pageNumber, 10, "latest")
-        .then(res => res.json())
-        .then(json => {
-            dispatch( {
-                type: GET_LAST_PHOTOS_SUCCESS,
-                payload: extractDataFromFeed(json)
-            });
-        })
-        .catch((e) => {
-            setTimeout(() => {
-                dispatch({
-                    type: GET_LAST_PHOTOS_FAIL,
-                    payload: new Error(e)
-                });
-            }, 200)
-        });
-};
-
-export const getLastPhotosRequest = () => {
+export const getLastPhotos = () => {
     return dispatch => {
         dispatch({
             type: GET_LAST_PHOTOS_REQUEST
         });
-    };
-};
 
-export const getLastPhotosSuccess = (json) => {
-    return dispatch => {
-        dispatch( {
-            type: GET_LAST_PHOTOS_SUCCESS,
-            payload: extractDataFromFeed(json)
-        });
+        unsplash.photos.listPhotos(++pageCounter, 10, "latest")
+        .then(res => res.json())
+          .then(json => {
+            dispatch( {
+                type: GET_LAST_PHOTOS_SUCCESS,
+                payload: extractDataFromFeed(json)
+            });
+          })
+          .catch((e) => {
+              setTimeout(() => {
+                dispatch({
+                    type: GET_LAST_PHOTOS_FAIL,
+                    payload: new Error(e)
+                });
+              }, 200);
+          });
     }
-};
-
-export const getLastPhotosFail = (e) => {
-    return dispatch => {
-        dispatch({
-            type: GET_LAST_PHOTOS_FAIL,
-            payload: new Error(e)
-        });
-    }
-};
-
-
-//TODO перенести сюда логику с cached, как здесь: https://github.com/maxfarseer/redux-course-ru-v2/blob/chp13-optimize-re-renders/src/actions/PageActions.jsфзз
+}
 
 export const rememberScrollPosition = (scrollTop) => {
     return dispatch => {
@@ -132,4 +110,4 @@ export const rememberScrollPosition = (scrollTop) => {
             payload: scrollTop
         })
     }
-}
+};
