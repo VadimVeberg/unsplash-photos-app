@@ -34,7 +34,6 @@ const splitDataToColumns = (arr) => {
     }
 };
 
-//TODO make columns same height
 const extractDataFromFeed = (arr) => {
     const photos = [];
     arr.map(({

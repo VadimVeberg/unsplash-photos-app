@@ -23,7 +23,7 @@ const Likes = ({countOfLikes, isLiked, ...props}) => {
             <span>{countOfLikes}</span> 
         <LikesIcon isLiked={isLiked}/>
         </LikesCount>
-    )
+    );
 };
 
 export default Likes;

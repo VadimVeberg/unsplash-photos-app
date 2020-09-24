@@ -32,7 +32,7 @@ export const setToken = (token) => {
         dispatch({
             type: SET_TOKEN_REQUEST
         });
-//TODO test error by replacing token in local storage for wrong value
+
         try {
             unsplash.auth.setBearerToken(token);
             dispatch({

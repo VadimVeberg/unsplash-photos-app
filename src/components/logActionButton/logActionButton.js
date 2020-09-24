@@ -5,13 +5,11 @@ import Button from '../button/button';
 
 //context 
 import UserContext from '../../contexts/userContext';
-//TODO smaller button in app header on small screensf 
 const LogActionButton = ({type, size}) => {
     const { logIn, logOut } = useContext(UserContext);
 
     return (
         <Button
-        //TODO make button change color according type
             options={{
                 color: type === 'login' ? 'green' : type === 'logout' ? 'red' : null,
                 bgColor: 'white',
@@ -29,7 +27,7 @@ const LogActionButton = ({type, size}) => {
             }}>
                 Log {type === 'login' ? 'in' : type === 'logout' ? 'out' : null}
         </Button>
-    )
+    );
 };
 
 export default LogActionButton;

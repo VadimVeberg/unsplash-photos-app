@@ -31,11 +31,10 @@ const FeedItem = ({id, data}) => {
             <Likes countOfLikes={likes} isLiked={liked_by_user}>
             </Likes>
         );
-    }
+    };
     
     return (
         <PhotoCard>
-        {console.log('RENDER')}
             <Picture 
             color={preRender.color} 
             ratio={preRender.ratio}
@@ -51,7 +50,7 @@ const FeedItem = ({id, data}) => {
             dateAdded={dateAdded}
             isLiked={liked_by_user}/>
         </PhotoCard>
-    )
+    );
 };
 
 export default FeedItem;

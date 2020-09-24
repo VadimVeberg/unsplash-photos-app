@@ -43,7 +43,6 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
         }
         getBigPhoto(photoId);  //get request AFTER setting token/auth
     }, []);
-//TODO make photos not loading while authorization
 
     const renderError = (errorType, description) => {
         return errorType ? <UserMessage error={true} text={`Error! Can't ${description} photo`}/> : null;
@@ -72,22 +71,22 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
                 </LoadingStatus>
             </AppContent>
         </>
-    )
+    );
 };
 
 const mapStateToProps = store => {
     return {
         bigPhoto: store.bigPhoto
     }
-  }
+};
   
 const mapDispatchToProps = dispatch => {
-return {
-    getBigPhoto: id => dispatch(getBigPhoto(id)),
-    clearStore: () => dispatch(clearStore()),
-    likePhoto: (id) => dispatch(likePhoto(id)),
-    unLikePhoto: (id) => dispatch(unLikePhoto(id))
-}
-}
+    return {
+        getBigPhoto: id => dispatch(getBigPhoto(id)),
+        clearStore: () => dispatch(clearStore()),
+        likePhoto: (id) => dispatch(likePhoto(id)),
+        unLikePhoto: (id) => dispatch(unLikePhoto(id))
+    }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BigPhotoPage);

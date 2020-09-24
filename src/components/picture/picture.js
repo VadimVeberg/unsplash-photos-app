@@ -38,7 +38,7 @@ const Picture = ({color, ratio, src, alt, ...props}) => {
             <Image src={src} alt={alt}/> 
                 {props.children}
         </FadeInBlock>
-    )
+    );
 };
 
 export default Picture;

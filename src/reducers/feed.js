@@ -10,8 +10,7 @@ const initialState = {
     isFetching: false,
     isShowedOnce: false,  // to avoid requests when the user returns from big photo to feed
     scrollPosition: 0,
-}
-//TODO оптимизация масштаба и фото на мобильных телефонах
+};
 
 export function feedReducer(state = initialState, action) {
     switch (action.type) {
@@ -43,7 +42,6 @@ export function feedReducer(state = initialState, action) {
                 ...state,
                 scrollPosition: action.payload
             }
-        //TODO make function below
         case LIKE_PHOTO_SUCCESS:
             if (!state.isShowedOnce) {   //if feed wasn't loaded before user like photo
                 return state;

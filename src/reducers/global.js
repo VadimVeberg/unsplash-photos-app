@@ -21,9 +21,7 @@ const initialState = {
     // isLogged: false - guest mode  
     // isLogged: null - must suggest authorization 
     // isLogged: true - get and set token
-}
-
-//TODO make visual msessages for auth
+};
 
 export function globalReducer(state = initialState, action) {
     switch (action.type) {

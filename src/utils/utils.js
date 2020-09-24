@@ -42,16 +42,16 @@ export const extractDateString = (str) => {
         break;
     }
     
-    return `${day} ${month}, ${time}`
+    return `${day} ${month}, ${time}`;
 }
 
 export const calcAspectRatio = (width, height) => {
     return Math.round((height * 100) / width);
-}
+};
 
 export const isEmpty = (obj) =>{
     for (let key in obj) {
       return false;
     }
     return true;
-}
+};

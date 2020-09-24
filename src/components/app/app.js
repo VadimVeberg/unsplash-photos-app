@@ -52,7 +52,7 @@ const AppBlock = styled.div`
       border-radius: 0;
   }
 `;
-//TODO prop types
+
 const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken, getAuthUrl}) => {
   const isInitialMount = useRef(false);
 
@@ -79,7 +79,7 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
     userAuth,
     logIn,
     logOut
-  }
+  };
   
   const loginWindow = isLogged === null ? <LogInWindow/> : null;
 
@@ -88,7 +88,6 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
       <ThemeProvider theme={theme}>  {/* making access to global style variables */}
         <UserContext.Provider value={user}>    {/* allows to get global user login/out data in every page or component */}
           <AppContainer>
-            {/*TODO in Safari border radius of app is blincking*/}
               <AppBlock >
                 {loginWindow}
                 { isLogged !== null &&
@@ -109,7 +108,7 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
       </ThemeProvider>
     </Router>
   );
-}
+};
 
 const mapStateToProps = store => {
   return {
@@ -124,9 +123,8 @@ const mapDispatchToProps = dispatch => {
     setToken: (code) => dispatch(setToken(code)),
     getAuthUrl: () => dispatch(getAuthUrl()),
   }
-}
-  
-//TODO сделать разделение кода + ленивую подгрузуку для компонентов реализовать номрально, как здесь описано https://ru.reactjs.org/docs/code-splitting.html
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 

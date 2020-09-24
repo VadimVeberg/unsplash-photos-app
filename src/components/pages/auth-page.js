@@ -41,7 +41,7 @@ const mapStateToProps = store => {
     return {
       user: store.user,
     }
-}
+};
 
 const mapDispatchToProps = dispatch => {
     return {

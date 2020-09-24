@@ -6,7 +6,7 @@ const initialState = {
     isFetching: false,
     likeError: '',
     unLikeError: ''
-}
+};
 
 export function bigPhotoReducer(state = initialState, action) {
     switch (action.type) {

@@ -16,7 +16,7 @@ const BackgroundField = ({color, ratio}) => {
     return (
         <Wrapper color={color} ratio={ratio}>
         </Wrapper>
-    )
+    );
 };
 
 export default BackgroundField;

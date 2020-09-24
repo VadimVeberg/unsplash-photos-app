@@ -2,16 +2,14 @@ import React from 'react';
 //styles
 import styled from 'styled-components';
 
-
-const UserMessage = ({error, text, ...props}) => {
-    //TODO remove component from here
-    const MessageText = styled.span`
-        color: ${error ? props => props.theme.red : props => props.theme.black};
+const MessageText = styled.span`
+        color: ${props => props.error ? props.theme.red :props.theme.black};
         font-weight: 700;
     `;   
 
+const UserMessage = ({error, text, ...props}) => {
     return (
-    <MessageText>
+    <MessageText error={error}>
         {text}
         {props.children}
     </MessageText>)
@@ -19,6 +17,6 @@ const UserMessage = ({error, text, ...props}) => {
 
 UserMessage.defaultProps = {
     text: 'Something went wrong...'
-}
+};
 
 export default UserMessage;

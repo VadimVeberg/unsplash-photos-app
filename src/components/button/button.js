@@ -45,7 +45,7 @@ const Button = ({options : {color = 'red', bgColor = 'white', hoverColor = 'whit
         padding={padding}>
             {props.children}
         </Btn>
-    )
+    );
 };
 
 export default Button;

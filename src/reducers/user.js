@@ -5,7 +5,7 @@ import {GET_TOKEN_FAIL} from '../actions/UserActions';
 const initialState = {
     error: '', 
     isFetching: false
-}
+};
   
 export function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -18,4 +18,4 @@ export function userReducer(state = initialState, action) {
         default: 
             return state
     }
-}
+};

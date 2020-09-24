@@ -4,7 +4,7 @@ import './spinner.scss';
 import styled from 'styled-components';
 
 const SpinnerWrapper = styled.div`
-transform: scale(.5);
+    transform: scale(.5);
 `;
 
 const Spinner = () => {
@@ -17,7 +17,7 @@ const Spinner = () => {
                 </div>
             </div>
         </SpinnerWrapper>
-    )
+    );
 }
 
 export default Spinner;

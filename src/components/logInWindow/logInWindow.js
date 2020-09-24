@@ -48,7 +48,7 @@ const LogInWindow = () => {
                     Guest Mode
                 </Link>
         </ModalOverlay>
-    )
+    );
 };
 
 export default LogInWindow;

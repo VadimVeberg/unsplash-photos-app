@@ -21,7 +21,7 @@ const FeedAppContent = ({setScrollPosition, rememberScrollPosition, onScrollFeed
             props={props}>
                     {props.children}
         </AppContent>
-    )
+    );
 }
 
 export default FeedAppContent;

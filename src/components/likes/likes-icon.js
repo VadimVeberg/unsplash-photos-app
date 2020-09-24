@@ -29,7 +29,7 @@ const LikesIcon = ({isLiked}) => {
                 C512,93.417,453.532,30,376,30z"/>
             </g>
         </LikesIconSvg>
-    )
+    );
 };
 
 export default LikesIcon;

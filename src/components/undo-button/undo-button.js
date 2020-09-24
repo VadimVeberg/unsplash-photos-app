@@ -51,6 +51,6 @@ const UndoButton = () => {
               <ButtonIcon/>
         </Button>
     )
-}
+};
 
 export default UndoButton;

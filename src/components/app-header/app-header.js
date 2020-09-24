@@ -29,7 +29,6 @@ const AppHeaderContainer = styled.div`
         backdrop-filter: blur(15px);
         --webkit-backdrop-filter: blur(15px);
     } */
-
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
@@ -38,7 +37,6 @@ const AppHeaderContainer = styled.div`
     }
 `;
 
- //TODO remove opacity 
 const AppIcon = styled.svg`
     height: 35px;
     width: 35px;
