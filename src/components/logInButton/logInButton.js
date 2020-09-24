@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 //Components
 import Button from '../button/button';
 
-const LogInButton = ({logIn}) => {
+//context 
+import UserContext from '../../contexts/userContext';
+
+const LogInButton = () => {
+    const { logIn } = useContext(UserContext);
+
     return (
         <Button
             options={{

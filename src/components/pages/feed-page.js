@@ -38,22 +38,27 @@ let pageCounter = 1;
 
 //TODO убрать черные куски фона под фото ( из-за тени)
 const FeedPage = ({feed, getLastPhotosRequest, getLastPhotosSuccess, getLastPhotosFail, rememberScrollPosition}) => {
-  const { isLogged, userAuth } = useContext(UserContext);
+  const { isLogged, isTokenSetted, userAuth } = useContext(UserContext);
 
   useEffect(() => {
     if (!feed.isShowedOnce) {
       //TODO make error handling if token is invalid
       if (isLogged === true) {
         userAuth();
+        getLastPhotos();
+      } else {
+        getLastPhotos();
       }
-      getLastPhotos();    //get request AFTER setting token/auth
+          //get request AFTER setting token/auth
     }
     console.log('monut');
   }, []);
 
-  useEffect(() => {
-    console.log('updating');
-  }, [feed])
+  useEffect(() => {            //when global state is updating and component receive new value of isLogged prop (when user clicks on LogIn Button)
+    if (isLogged === true) {
+      userAuth();
+    }
+  }, [isLogged]);
 
 //TODO favicon
 //TODO handling 403 error, when requests limit exced

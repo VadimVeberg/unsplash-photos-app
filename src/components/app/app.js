@@ -66,33 +66,36 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
   
   const user = {
     isLogged,
-    userAuth
+    isTokenSetted,
+    userAuth,
+    logIn,
+    logOut
   }
 
   //TODO layout on mobile devices
-  const loginWindow = isLogged === null ? <LogInWindow logIn={logIn} logOut={logOut}/> : null;
+  const loginWindow = isLogged === null ? <LogInWindow/> : null;
 
   return (
     <Router>
       <ThemeProvider theme={theme}>  {/* making access to global style variables */}
-        <AppContainer>
-          {/*TODO in Safari border radius of app is blincking*/}
-            <AppBlock>
+        <UserContext.Provider value={user}>    {/* allows to get global user login/out data in every page or component */}
+          <AppContainer>
+            {/*TODO in Safari border radius of app is blincking*/}
+              <AppBlock>
                 {loginWindow}
                 { isLogged !== null &&
-                    <UserContext.Provider value={user}>    {/* allows to get global user login/out data in every page or component */}
-                      <Switch>
-                        <Route exact path='/auth' component={AuthPage}/>
-                        <Route exact path='/' component={FeedPage}/>
-                        <Route exact path='/:id' render={({match}) => {
-                          const {id} = match.params;
-                          return <BigPhotoPage photoId={id}/>
-                        }}/>
-                    </Switch>
-                    </UserContext.Provider>
+                  <Switch>
+                    <Route exact path='/auth' component={AuthPage}/>
+                    <Route exact path='/' component={FeedPage}/>
+                    <Route exact path='/:id' render={({match}) => {
+                      const {id} = match.params;
+                      return <BigPhotoPage photoId={id}/>
+                    }}/>
+                  </Switch>
                 }
-            </AppBlock>
-        </AppContainer> 
+              </AppBlock>
+          </AppContainer> 
+        </UserContext.Provider>
       </ThemeProvider>
     </Router>
   );

@@ -12,6 +12,7 @@ export const GET_AUTH_URL_FAIL = 'GET_AUTH_URL_FAIL';
 
 export const logIn = () => {
     sessionStorage.setItem('isLogged', true);
+    
     return {
         type: LOG_IN
     }

@@ -4,6 +4,8 @@ const initialState = {
     bigPhotoData: {},
     error: '',
     isFetching: false,
+    likeError: '',
+    unLikeError: ''
 }
 
 export function bigPhotoReducer(state = initialState, action) {
@@ -33,7 +35,8 @@ export function bigPhotoReducer(state = initialState, action) {
             }
         case LIKE_PHOTO_REQUEST: 
             return {
-                ...state
+                ...state,
+                likeError: ''
             }
         case LIKE_PHOTO_SUCCESS: 
             return {
@@ -45,9 +48,15 @@ export function bigPhotoReducer(state = initialState, action) {
                 }
             }
         case LIKE_PHOTO_FAIL: 
-            return state
+            return {
+                ...state,
+                likeError: action.payload.message
+            }
         case UNLIKE_PHOTO_REQUEST: 
-            return state
+            return  {
+                ...state,
+                unLikeError: ''
+            }
         case UNLIKE_PHOTO_SUCCESS: 
             return {
                 ...state,
@@ -58,7 +67,10 @@ export function bigPhotoReducer(state = initialState, action) {
                 }
             }
         case UNLIKE_PHOTO_FAIL: 
-            return state
+            return {
+                ...state,
+                unLikeError: action.payload.message
+            }
         default: 
         return state;
     }

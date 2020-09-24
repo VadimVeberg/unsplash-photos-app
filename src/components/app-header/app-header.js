@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+//components
+import LogInButton from '../logInButton/logInButton';
+
+//context 
+import UserContext from '../../contexts/userContext';
 
 //styles
 import styled from 'styled-components';
@@ -43,8 +49,15 @@ const AppIcon = styled.svg`
     }
 `;
 
+const ButtonWrapper = styled.div`
+    position: absolute;
+    right: 15px;
+`;
+
 
 const AppHeader = (props) => {
+    const { isLogged } = useContext(UserContext);
+
     return (
         <AppHeaderContainer>
             {props.children}
@@ -52,6 +65,10 @@ const AppHeader = (props) => {
                 <path d="M58,13h-4V9h-4V5H8v4H4v4H0v32h4v4h4v4h42v-4h4v-4h4V13z M2,43V15h2v28H2z M6,47v-2V13v-2h2v36H6z M48,51H10v-2V9V7h38v2v40
                 V51z M52,47h-2V11h2v2v32V47z M56,43h-2V15h2V43z"/>
             </AppIcon>
+            {isLogged === false && 
+                <ButtonWrapper>
+                    <LogInButton/>
+                </ButtonWrapper>}
         </AppHeaderContainer>
     )
 };

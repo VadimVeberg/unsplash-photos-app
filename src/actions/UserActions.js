@@ -5,7 +5,7 @@ export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
 export const GET_TOKEN_FAIL = 'GET_TOKEN_FAIL';
 
 export function getToken() {
-    return dispatch => {
+    return async dispatch => {
         dispatch({
             type: GET_TOKEN_REQUEST
         })
@@ -17,9 +17,6 @@ export function getToken() {
             unsplash.auth.userAuthentication(code)
             .then(res => res.json())
             .then(json => {
-
-                console.log(json);
-                console.log(code);
                 sessionStorage.setItem('token', json.access_token);
                 dispatch({
                     type: GET_TOKEN_SUCCESS,
@@ -36,4 +33,4 @@ export function getToken() {
         }
 
     }
-}
+};

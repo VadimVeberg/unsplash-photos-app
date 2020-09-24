@@ -31,7 +31,7 @@ const UndoLink = styled(Link)`
 `;
 
 const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, unLikePhoto}) => {
-    const { bigPhotoData } = bigPhoto;
+    const { bigPhotoData, error, isFetching, likeError, unLikeError } = bigPhoto;
     const { isLogged, userAuth } = useContext(UserContext);
 
     useEffect(() => {
@@ -43,9 +43,19 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
         }
         getBigPhoto(photoId);  //get request AFTER setting token/auth
     }, []);
+//TODO make photos not loading while authorization
+    useEffect(() => {            //when global state is updating and component receive new value of isLogged prop (when user clicks on LogIn Button)
+        if (isLogged === true) {
+          userAuth();
+        }
+      }, [isLogged]);
+    
 
-    const error = bigPhoto.error ? <UserMessage error={true} text={`Error! Can't load photo`}/> : null;
-    const loading = bigPhoto.isFetching ? <Spinner small/> : null;
+    const renderError = (errorType, description) => {
+        return errorType ? <UserMessage error={true} text={`Error! Can't ${description} photo`}/> : null;
+    };
+
+    const loading = isFetching ? <Spinner small/> : null;
 
     return (
         <>
@@ -62,7 +72,9 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
                     unLikePhoto={unLikePhoto}/>
                 <LoadingStatus>
                     {loading}
-                    {error}
+                    {renderError(error, 'load')}
+                    {renderError(likeError, 'like')}
+                    {renderError(unLikeError, 'unlike')}
                 </LoadingStatus>
             </AppContent>
         </>
