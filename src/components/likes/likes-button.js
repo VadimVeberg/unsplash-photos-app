@@ -30,7 +30,7 @@ const Button = styled.button`
 const LikesButton = ({isLiked, likePhoto, unLikePhoto, photoId}) => {
     return (
         <Button onClick={() => isLiked ? unLikePhoto(photoId) : likePhoto(photoId)}>
-            {isLiked ? 'Не нравится' : 'Нравится'}
+            {isLiked ? 'Unlike' : 'Like'}
         </Button>
     );
 };

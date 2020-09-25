@@ -9,8 +9,11 @@ const PhotoCardWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: ${props => props.width || ''};
-
+    
+    /* height: 100% */
+    /* width: auto;
+    height: 100%;
+    width: 95%; */
     margin-top: 18px;
 
     @media (max-width: 576px) {

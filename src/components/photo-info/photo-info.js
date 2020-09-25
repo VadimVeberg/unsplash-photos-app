@@ -21,9 +21,13 @@ const PhotoInfoWrapper = styled.div`
      }
 `;
 
-const AuthorLink = styled.a`
+const Author = styled.div`
     flex-grow: 1;
 
+    display: inline-block;
+
+`;
+const AuthorLink = styled.a`
     color: ${props => props.theme.black};
     font-size: 16px;
     font-weight: 600;
@@ -60,7 +64,9 @@ const DateAdded = styled.time`
 const PhotoInfo = ({renderLikes, authorLink, authorName, dateAdded}) => {
     return (
         <PhotoInfoWrapper>
-            <AuthorLink href={authorLink} target="blank" >{authorName}</AuthorLink>
+            <Author>
+                <AuthorLink href={authorLink} target="blank" >{authorName}</AuthorLink>
+            </Author>
             {renderLikes()}
             <DateAdded>{dateAdded}</DateAdded>
         </PhotoInfoWrapper>

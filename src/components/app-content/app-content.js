@@ -27,16 +27,18 @@ const Content = styled.div`
     align-items: center;
     flex-direction: column;
 
+    height: ${props => props.height ? props.height : ''};
+
     border-radius: inherit;
 
     padding-bottom: 20px;
 `;
 
-const AppContent = ({onScrollFeed, appContentElement, ...props}) => {
+const AppContent = ({onScrollFeed, appContentElement, height, ...props}) => {
     return (
         <ContentField
         onScroll={onScrollFeed ? e => onScrollFeed(e) : null} ref={appContentElement}>
-            <Content>
+            <Content height={height}>
                 {props.children}
             </Content>
         </ContentField>

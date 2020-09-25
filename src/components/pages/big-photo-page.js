@@ -57,18 +57,21 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
                     <UndoButton/>
                 </UndoLink>
             </AppHeader>
-            <AppContent>
+            <AppContent height={'100%'}>
                 <BigPhotoItem
                     data={bigPhotoData}
                     id={photoId}
                     likePhoto={likePhoto}
                     unLikePhoto={unLikePhoto}/>
-                <LoadingStatus>
-                    {loading}
-                    {renderError(error, 'load')}
-                    {renderError(likeError, 'like')}
-                    {renderError(unLikeError, 'unlike')}
-                </LoadingStatus>
+                {
+                    (error || loading) && 
+                    <LoadingStatus>
+                        {loading}
+                        {renderError(error, 'load')}
+                        {renderError(likeError, 'like')}
+                        {renderError(unLikeError, 'unlike')}
+                    </LoadingStatus>
+                }
             </AppContent>
         </>
     );

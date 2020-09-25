@@ -17,7 +17,6 @@ const fadeIn = keyframes`
 
 const FadeInBlock = styled.div`
     width: 100%;
-    height: auto;
     position: relative;
 
     animation: .18s ${fadeIn} ease-in;
