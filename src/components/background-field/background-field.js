@@ -10,6 +10,7 @@ const Wrapper = styled.div`
         background-color: ${props => props.color}; 
         border-radius: 10px;
         transform: scale(.97); 
+        z-index: -30;
 `;
 
 const BackgroundField = ({color, ratio}) => {

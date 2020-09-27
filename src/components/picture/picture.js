@@ -1,7 +1,7 @@
 import React from 'react';
 
 //components
-import BackgroundField from '../backgroundField/backgroundField';
+import BackgroundField from '../background-field/background-field';
 
 //styles
 import styled, { keyframes } from 'styled-components';
@@ -17,7 +17,9 @@ const fadeIn = keyframes`
 
 const FadeInBlock = styled.div`
     width: 100%;
+    height: 100%;
     position: relative;
+    /* height: ${props => props.height ? props.height : ''}; */
 
     animation: .18s ${fadeIn} ease-in;
 `;
@@ -29,10 +31,10 @@ const Image = styled.img`
     border-radius: 10px;
 `;
 
-
-const Picture = ({color, ratio, src, alt, ...props}) => {
+const Picture = ({color, ratio, src, alt, height, type, ...props}) => {
+  //TODO break make versions of picture component - two different compontnes with independend styles
     return (
-        <FadeInBlock>
+        <FadeInBlock height={height}>
             <BackgroundField color={color} ratio={ratio}/>   
             <Image src={src} alt={alt}/> 
                 {props.children}

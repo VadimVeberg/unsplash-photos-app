@@ -4,6 +4,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ContentField = styled.div`
+    /* display: ${props => props.display? props.display : ''}; */
+    /*TODO Vlean this*/
+    /* justify-content: ${props => props.justifyContent ? props.justifyContent : ''}; */
     position: absolute;
     top: 0;
     overflow: scroll;
@@ -34,10 +37,13 @@ const Content = styled.div`
     padding-bottom: 20px;
 `;
 
-const AppContent = ({onScrollFeed, appContentElement, height, ...props}) => {
+const AppContent = ({onScrollFeed, appContentElement, height, display, justifyContent,  ...props}) => {
     return (
         <ContentField
-        onScroll={onScrollFeed ? e => onScrollFeed(e) : null} ref={appContentElement}>
+        onScroll={onScrollFeed ? e => onScrollFeed(e) : null} 
+        ref={appContentElement}
+        display={display}
+        justifyContent={justifyContent}>
             <Content height={height}>
                 {props.children}
             </Content>

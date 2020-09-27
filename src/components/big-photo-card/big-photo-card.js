@@ -4,26 +4,21 @@ import React from 'react'
 import styled from 'styled-components';
 
 const PhotoCardWrapper = styled.div`
-    position: relative;
-    
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
-    margin-top: 18px;
 
-    @media (max-width: 576px) {
-        margin-top: 12px;
-    }
+    width: 100%;
+
+    border-radius: 10px;
 `;
 
-const PhotoCard = ({...props}) => {
+const BigPhotoCard = ({width, ...props}) => {
 
     return (
-        <PhotoCardWrapper>
+        <PhotoCardWrapper width={width}>
             {props.children}
         </PhotoCardWrapper>
     )
 };
 
-export default PhotoCard;
+export default BigPhotoCard;

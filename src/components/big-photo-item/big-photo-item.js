@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
 //components
-import PhotoCard from '../photo-card/photo-card';
-import Picture from '../picture/picture';
+import BigPicture from '../big-picture/big-picture';
+import BigPhotoCard from '../big-photo-card/big-photo-card';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
 import LikesButton from '../likes/likes-button';
@@ -30,30 +30,18 @@ const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
         );
     };
 
-    const calcPhotoWidth = () => {
-        const isMobileDevice = document.documentElement.clientWidth < 576;
-    
-        const scales = {
-            vertical: isMobileDevice ? '95%' : '75%',
-            horizontal: '95%'
-        }
-
-        return preRender.ratio > 100 ? scales.vertical : scales.horizontal;
-    };
-
     return (
-    <PhotoCard width={calcPhotoWidth()}>
-            <Picture 
-            color={preRender.color} 
-            ratio={preRender.ratio}
+        <BigPhotoCard> {/*TODO break make styles for big photo card'*/}
+            <BigPicture 
             src={url} 
             alt={alt}/>
             <PhotoInfo
-                renderLikes={renderLikes}
-                authorLink={user.link}
-                authorName={user.name}
-                dateAdded={dateAdded}/> 
-        </PhotoCard>
+            renderLikes={renderLikes}
+            authorLink={user.link}
+            authorName={user.name}
+            dateAdded={dateAdded}
+            type={'big'}/> 
+        </BigPhotoCard>
     );
 };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 
 //Components
 import AppHeader from '../app-header/app-header';
-import AppContent from '../app-content/app-content';
+import BigPhotoAppContent from '../big-photo-app-content/big-photo-app-content';
 import BigPhotoItem from '../big-photo-item/big-photo-item';
 import UserMessage from '../userMessage/userMessage';
 import Spinner from '../spinner/spinner';
@@ -57,7 +57,7 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
                     <UndoButton/>
                 </UndoLink>
             </AppHeader>
-            <AppContent height={'100%'}>
+            <BigPhotoAppContent>
                 <BigPhotoItem
                     data={bigPhotoData}
                     id={photoId}
@@ -72,7 +72,7 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
                         {renderError(unLikeError, 'unlike')}
                     </LoadingStatus>
                 }
-            </AppContent>
+            </BigPhotoAppContent>
         </>
     );
 };

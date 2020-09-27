@@ -6,14 +6,14 @@ import styled from 'styled-components';
 const PhotoInfoWrapper = styled.div`
     width: 100%;
     margin-top: 17px;
-    padding: 0 7px;
+    padding: ${props => props.padding};
 
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
 
     @media (max-width: 576px) {
-        padding: 0 3px;
+        padding: ${props => props.paddingMobile};
      }
 
     @media (max-width: 576px) {
@@ -61,9 +61,12 @@ const DateAdded = styled.time`
     }
 `;
 
-const PhotoInfo = ({renderLikes, authorLink, authorName, dateAdded}) => {
+const PhotoInfo = ({renderLikes, authorLink, authorName, dateAdded, type}) => {
+    const padding = type === 'big' ? '0 10px' : '0 7px',
+        paddingMobile = type === 'big' ? '0 13px' : '0 3px';
+    
     return (
-        <PhotoInfoWrapper>
+        <PhotoInfoWrapper padding={padding} paddingMobile={paddingMobile}>
             <Author>
                 <AuthorLink href={authorLink} target="blank" >{authorName}</AuthorLink>
             </Author>
