@@ -1,4 +1,6 @@
-import { GET_BIG_PHOTO_REQUEST, GET_BIG_PHOTO_SUCCESS, GET_BIG_PHOTO_FAIL, CLEAR_STORE, LIKE_PHOTO_REQUEST, LIKE_PHOTO_SUCCESS, LIKE_PHOTO_FAIL, UNLIKE_PHOTO_REQUEST, UNLIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_FAIL } from '../actions/BigPhotoActions';
+import { GET_BIG_PHOTO_REQUEST, GET_BIG_PHOTO_SUCCESS, GET_BIG_PHOTO_FAIL, CLEAR_STORE } from '../actions/BigPhotoActions';
+import { LIKE_PHOTO_REQUEST, LIKE_PHOTO_SUCCESS, LIKE_PHOTO_FAIL, UNLIKE_PHOTO_REQUEST, UNLIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_FAIL } from '../actions/GlobalActions';
+import { isEmpty } from '../utils/utils';
 
 const initialState = {
     bigPhotoData: {},
@@ -7,6 +9,7 @@ const initialState = {
     likeError: '',
     unLikeError: ''
 };
+
 
 export function bigPhotoReducer(state = initialState, action) {
     switch (action.type) {
@@ -58,13 +61,19 @@ export function bigPhotoReducer(state = initialState, action) {
                 unLikeError: ''
             }
         case UNLIKE_PHOTO_SUCCESS: 
-            return {
-                ...state,
-                bigPhotoData: {
-                    ...state.bigPhotoData,
-                    liked_by_user: false,                    //to renew data without request to API
-                    likes: --state.bigPhotoData.likes
+            if (isEmpty(state.bigPhotoData)) {
+                return state;
+            } else if (action.payload === state.bigPhotoData.id) {
+                return {
+                    ...state,
+                    bigPhotoData: {
+                        ...state.bigPhotoData,
+                        liked_by_user: false,                    //to renew data without request to API
+                        likes: --state.bigPhotoData.likes
+                    }
                 }
+            } else {
+                return state;
             }
         case UNLIKE_PHOTO_FAIL: 
             return {

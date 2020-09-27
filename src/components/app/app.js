@@ -8,6 +8,7 @@ import BigPhotoPage from '../pages/big-photo-page';
 
 //context
 import UserContext from '../../contexts/userContext';
+import LikeActionsContext from '../../contexts/likeActionsContext';
 
 //styles
 import styled, { ThemeProvider } from 'styled-components';
@@ -16,7 +17,7 @@ import { theme } from '../../style_vars';
 
 //Redux
 import { connect } from 'react-redux';
-import { logIn, logOut, setToken, getAuthUrl } from '../../actions/GlobalActions';
+import { logIn, logOut, setToken, getAuthUrl, likePhoto, unLikePhoto } from '../../actions/GlobalActions';
 
 //router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -46,14 +47,14 @@ const AppBlock = styled.div`
   box-shadow: 0px 0px 25px ${props => props.theme.black};
 
   @media (max-width: 576px) {
-      height: 100vh;
+      height: ${window.innerHeight}px;  
       margin-top: 0;
 
       border-radius: 0;
   }
 `;
 
-const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken, getAuthUrl}) => {
+const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken, getAuthUrl, likePhoto, unLikePhoto}) => {
   const isInitialMount = useRef(false);
 
   useEffect(() => {
@@ -73,6 +74,11 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
       }
   };
   
+  const likeActions = {
+    likePhoto,
+    unLikePhoto
+  };
+
   const user = {
     isLogged,
     isTokenSetted,
@@ -80,6 +86,8 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
     logIn,
     logOut
   };
+
+  const widnowHeight = window.innerHeight;
   
   const loginWindow = isLogged === null ? <LogInWindow/> : null;
 
@@ -87,23 +95,25 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
     <Router>
       <ThemeProvider theme={theme}>  {/* making access to global style variables */}
         <UserContext.Provider value={user}>    {/* allows to get global user login/out data in every page or component */}
-          <AppContainer>
-              <AppBlock >
-                {loginWindow}
-                { isLogged !== null &&
-                  <Switch>
-                    <Route exact path='/auth' component={AuthPage}/>
-                    <Route exact path='/' render={() => {
-                      return <FeedPage/>
+          <LikeActionsContext.Provider value={likeActions}>
+            <AppContainer height={widnowHeight}>
+                <AppBlock >
+                  {loginWindow}
+                  { isLogged !== null &&
+                    <Switch>
+                      <Route exact path='/auth' component={AuthPage}/>
+                      <Route exact path='/' render={() => {
+                        return <FeedPage/>
+                        }}/>
+                      <Route exact path='/:id' render={({match}) => {
+                        const {id} = match.params;
+                        return <BigPhotoPage photoId={id}/>
                       }}/>
-                    <Route exact path='/:id' render={({match}) => {
-                      const {id} = match.params;
-                      return <BigPhotoPage photoId={id}/>
-                    }}/>
-                  </Switch>
-                }
-              </AppBlock>
-          </AppContainer> 
+                    </Switch>
+                  }
+                </AppBlock>
+            </AppContainer> 
+          </LikeActionsContext.Provider>
         </UserContext.Provider>
       </ThemeProvider>
     </Router>
@@ -122,6 +132,8 @@ const mapDispatchToProps = dispatch => {
     logOut: () => dispatch(logOut()),
     setToken: (code) => dispatch(setToken(code)),
     getAuthUrl: () => dispatch(getAuthUrl()),
+    likePhoto: (id) => dispatch(likePhoto(id)),
+    unLikePhoto: (id) => dispatch(unLikePhoto(id))
   }
 };
 

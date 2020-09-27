@@ -1,26 +1,29 @@
 import React from 'react';
 
 //components
-import LikesIcon from './likes-icon';
+import LikesButton from './likes-button';
 
 //styles
 import styled from 'styled-components';
 
 const LikesCount = styled.div`
     display: flex;
+    font-size: 17px;
 
     @media (max-width: 576px) {
-        font-size: 12px;
         align-items: center;
      }
 `;
 
-const Likes = ({countOfLikes, isLiked, ...props}) => {
+const Likes = ({countOfLikes, isLiked, photoId, ...props}) => {
     return (
         <LikesCount>
             {props.children}
             <span>{countOfLikes}</span> 
-        <LikesIcon isLiked={isLiked}/>
+        <LikesButton 
+        isLiked={isLiked}
+        photoId={photoId}
+        />
         </LikesCount>
     );
 };

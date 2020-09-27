@@ -62,7 +62,7 @@ const FeedPage = ({feed, getLastPhotos, rememberScrollPosition}) => {
 
   const renderItems = (arr) => {
     return arr.map(({id, ...props}) => {
-      return <FeedItem key={id} id={id} data={props}/>
+      return <FeedItem key={id} id={id} data={props} />
     })
   };
 
@@ -124,7 +124,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getLastPhotos: () => dispatch(getLastPhotos()),
-    rememberScrollPosition: (scrollTop) => dispatch(rememberScrollPosition(scrollTop))
+    rememberScrollPosition: (scrollTop) => dispatch(rememberScrollPosition(scrollTop)),
   }
 };
    

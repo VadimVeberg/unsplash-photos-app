@@ -4,9 +4,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ContentField = styled.div`
-    /* display: ${props => props.display? props.display : ''}; */
-    /*TODO Vlean this*/
-    /* justify-content: ${props => props.justifyContent ? props.justifyContent : ''}; */
     position: absolute;
     top: 0;
     overflow: scroll;

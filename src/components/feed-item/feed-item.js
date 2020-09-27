@@ -23,13 +23,13 @@ const LinkDiv = styled(Link)`
     z-index: 20;
 `;
 
+
 const FeedItem = ({id, data}) => {
     const {url, alt_description, user, dateAdded, likes, preRender, liked_by_user} = data;
 
     const renderLikes = () => {
         return (
-            <Likes countOfLikes={likes} isLiked={liked_by_user}>
-            </Likes>
+            <Likes countOfLikes={likes} isLiked={liked_by_user} photoId={id}/>
         );
     };
     

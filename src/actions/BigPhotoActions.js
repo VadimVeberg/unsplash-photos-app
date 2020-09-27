@@ -5,12 +5,6 @@ export const GET_BIG_PHOTO_REQUEST = 'GET_BIG_PHOTO_REQUEST';
 export const GET_BIG_PHOTO_SUCCESS = 'GET_BIG_PHOTO_SUCCESS';
 export const GET_BIG_PHOTO_FAIL = 'GET_BIG_PHOTO_FAIL';
 export const CLEAR_STORE = 'CLEAR_STORE';
-export const LIKE_PHOTO_REQUEST = 'LIKE_PHOTO_REQUEST';
-export const LIKE_PHOTO_SUCCESS = 'LIKE_PHOTO_SUCCESS';
-export const LIKE_PHOTO_FAIL = 'LIKE_PHOTO_FAIL';
-export const UNLIKE_PHOTO_REQUEST = 'UNLIKE_PHOTO_REQUEST';
-export const UNLIKE_PHOTO_SUCCESS = 'UNLIKE_PHOTO_SUCCESS';
-export const UNLIKE_PHOTO_FAIL = 'UNLIKE_PHOTO_FAIL';
 
 const extractDataFromBigPhoto = (
     {
@@ -83,51 +77,4 @@ export const clearStore = () => {
             type: CLEAR_STORE
         });
     }
-};
-
-export const likePhoto = (id) => {
-    return dispatch => {
-        dispatch({
-            type: LIKE_PHOTO_REQUEST
-        });
-
-        unsplash.photos.likePhoto(id)
-        .then(res => res.json())
-        .then(json => {
-            dispatch({
-                type: LIKE_PHOTO_SUCCESS,
-                payload: id
-            });
-        })
-        .catch(e => {
-            dispatch({
-                type: LIKE_PHOTO_FAIL,
-                payload: new Error(e)
-            })
-        }); 
-    };
-};
-
-export const unLikePhoto = (id) => {
-    return dispatch => {
-        dispatch({
-            type: UNLIKE_PHOTO_REQUEST
-        });
-
-        unsplash.photos.unlikePhoto(id)
-        .then(res => res.json())
-        .then(json => {
-            dispatch({
-                type: UNLIKE_PHOTO_SUCCESS,
-                payload: id
-            });
-            
-        })
-        .catch(e => {
-            dispatch({
-                type: UNLIKE_PHOTO_FAIL,
-                payload: new Error(e)
-            })
-        });
-    };
 };

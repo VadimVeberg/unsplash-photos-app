@@ -32,7 +32,6 @@ const Image = styled.img`
 `;
 
 const Picture = ({color, ratio, src, alt, height, type, ...props}) => {
-  //TODO break make versions of picture component - two different compontnes with independend styles
     return (
         <FadeInBlock height={height}>
             <BackgroundField color={color} ratio={ratio}/>   

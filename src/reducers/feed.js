@@ -1,5 +1,5 @@
 import { GET_LAST_PHOTOS_REQUEST, GET_LAST_PHOTOS_SUCCESS, GET_LAST_PHOTOS_FAIL, REMEMBER_SCROLL_POSITION } from '../actions/FeedActions';
-import { LIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_SUCCESS } from '../actions/BigPhotoActions';
+import { LIKE_PHOTO_SUCCESS, UNLIKE_PHOTO_SUCCESS, } from '../actions/GlobalActions';
 
 const initialState = {
     photos: {

@@ -17,31 +17,33 @@ import styled from 'styled-components';
 
 //Redux
 import { connect } from 'react-redux';
-import { getBigPhoto, clearStore, likePhoto, unLikePhoto } from '../../actions/BigPhotoActions';
+import { getBigPhoto, clearStore } from '../../actions/BigPhotoActions';
 
 //router 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const UndoLink = styled(Link)`
     position: absolute;
-    left: 20px;
+    left: 12px;
 
     width: 45px;
     height: 45px;
 `;
 
-const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, unLikePhoto}) => {
+const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore}) => {
     const { bigPhotoData, error, isFetching, likeError, unLikeError } = bigPhoto;
     const { isLogged, userAuth } = useContext(UserContext);
 
     useEffect(() => {
         if (bigPhotoData.id !== photoId) {
             clearStore();
+
+            if (isLogged === true) {
+                userAuth();
+            }
+
+            getBigPhoto(photoId);  //get request AFTER setting token/auth
         } 
-        if (isLogged === true) {
-            userAuth();
-        }
-        getBigPhoto(photoId);  //get request AFTER setting token/auth
     }, []);
 
     const renderError = (errorType, description) => {
@@ -60,9 +62,7 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore, likePhoto, un
             <BigPhotoAppContent>
                 <BigPhotoItem
                     data={bigPhotoData}
-                    id={photoId}
-                    likePhoto={likePhoto}
-                    unLikePhoto={unLikePhoto}/>
+                    id={photoId}/>
                 {
                     (error || loading) && 
                     <LoadingStatus>
@@ -86,9 +86,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         getBigPhoto: id => dispatch(getBigPhoto(id)),
-        clearStore: () => dispatch(clearStore()),
-        likePhoto: (id) => dispatch(likePhoto(id)),
-        unLikePhoto: (id) => dispatch(unLikePhoto(id))
+        clearStore: () => dispatch(clearStore())
     }
 };
 

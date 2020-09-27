@@ -1,37 +1,31 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 //components
 import BigPicture from '../big-picture/big-picture';
 import BigPhotoCard from '../big-photo-card/big-photo-card';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
-import LikesButton from '../likes/likes-button';
-
-//context 
-import UserContext from '../../contexts/userContext';
 
 //utils
 import { isEmpty } from '../../utils/utils';
 
-const BigPhotoItem = ({id, data, likePhoto, unLikePhoto}) => {
-    const { isLogged } = useContext(UserContext);
+const BigPhotoItem = ({id, data}) => {
 
     if (isEmpty(data)) {
         return null;
     }
 
-    const {url, alt, user, dateAdded, likes, preRender, liked_by_user} = data;
+    const {url, alt, user, dateAdded, likes, liked_by_user} = data;
 
     const renderLikes = () => {
         return (
-            <Likes countOfLikes={likes} isLiked={liked_by_user}>
-                {isLogged === true && <LikesButton photoId={id} isLiked={liked_by_user} likePhoto={likePhoto} unLikePhoto={unLikePhoto}/>}
-            </Likes>
+            <Likes countOfLikes={likes} isLiked={liked_by_user} 
+            photoId={id}/>
         );
     };
 
     return (
-        <BigPhotoCard> {/*TODO break make styles for big photo card'*/}
+        <BigPhotoCard> 
             <BigPicture 
             src={url} 
             alt={alt}/>
