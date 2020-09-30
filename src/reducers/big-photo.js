@@ -3,7 +3,8 @@ import { LIKE_PHOTO_REQUEST, LIKE_PHOTO_SUCCESS, LIKE_PHOTO_FAIL, UNLIKE_PHOTO_R
 import { isEmpty } from '../utils/utils';
 
 const initialState = {
-    bigPhotoData: {},
+    bigPhotoData: {
+    },
     error: '',
     isFetching: false,
     likeError: '',
@@ -42,12 +43,16 @@ export function bigPhotoReducer(state = initialState, action) {
                 likeError: ''
             }
         case LIKE_PHOTO_SUCCESS: 
-            return {
-                ...state,
-                bigPhotoData: {
-                    ...state.bigPhotoData,
-                    liked_by_user: true,                     //to renew data without request to API
-                    likes: ++state.bigPhotoData.likes
+            if (isEmpty(state.bigPhotoData)) {
+                return state;
+            } else {
+                return {
+                    ...state,
+                    bigPhotoData: {
+                        ...state.bigPhotoData,
+                        liked_by_user: true,                     //to renew data without request to API
+                        likes: ++state.bigPhotoData.likes
+                    }
                 }
             }
         case LIKE_PHOTO_FAIL: 

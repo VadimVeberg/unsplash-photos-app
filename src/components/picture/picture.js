@@ -19,7 +19,6 @@ const FadeInBlock = styled.div`
     width: 100%;
     height: 100%;
     position: relative;
-    /* height: ${props => props.height ? props.height : ''}; */
 
     animation: .18s ${fadeIn} ease-in;
 `;
@@ -27,7 +26,9 @@ const FadeInBlock = styled.div`
 const Image = styled.img`
     position: absolute;
     top: 0;
+    
     width: 100%;
+
     border-radius: 10px;
 `;
 

@@ -33,8 +33,6 @@ const Image = styled.img`
   object-fit: contain;
   width: 95%;
   height: 100%;
-
-  border-radius: 10px;
 `;
 
 const BigPicture = ({src, alt, ...props}) => {

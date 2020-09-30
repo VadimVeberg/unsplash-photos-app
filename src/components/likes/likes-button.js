@@ -8,14 +8,19 @@ import LikeActionsContext from '../../contexts/likeActionsContext';
 import styled from 'styled-components';
 
 const LikesIconSvg = styled.svg`
-    width: 25px;
-    height: 25px;
+    width: 23px;
+    height: 23px;
 
     cursor: pointer;
 
     margin-left: 11px;
 
     fill: ${props => props.isLiked ? props.theme.red : props.theme.black};
+
+    @media(max-width: 576px) {
+        width: 19px;
+        height: 19px;
+    }
 `;
 
 const LikesButton = ({isLiked, photoId}) => {

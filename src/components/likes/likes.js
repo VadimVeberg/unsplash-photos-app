@@ -12,6 +12,8 @@ const LikesCount = styled.div`
 
     @media (max-width: 576px) {
         align-items: center;
+
+        font-size: 14px;
      }
 `;
 
