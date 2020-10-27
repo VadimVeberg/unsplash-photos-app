@@ -12,7 +12,7 @@ Oauth
 Async actions, redux-thunk
 ## Patterns
 
-## Styled Components
+## Styled Components and ReactStrap
 Dynamically created styles/ in some components
 
 ## Error Bounding
