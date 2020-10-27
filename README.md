@@ -2,7 +2,9 @@
 This is my diploma work on Skillbox course "JavaScript".
 
 ## React, Redux and React-router
-No class components, I used **React hooks** everywhere. For routing between pages, for exmaple between [feed](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) and [big photo page](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/big-photo-page.js)
+That's the base of my app. No classes components, **React hooks** everywhere instead. Redux store combined by few reducers accroding to each page of app and one global reducer for user authentication. Some actions are global, some are local for current page, see more at [actions](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/actions), [reducers](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/reducers), [store](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/store). 
+I also used React API  React.context and 
+For routing between pages, for exmaple between [feed](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) and [big photo page](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/big-photo-page.js)
 
 ## Feed
 containers for photo
