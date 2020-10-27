@@ -1,5 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Unsplash Photos App](https://unsplash-photos.ru/)
+This is my diploma work on Skillbox course "JavaScript". Unsplash-photos-app allows you to watch and like photos from unsplash.com.
 
+## React, Redux and React-router
+No class components, I used **React hooks** everywhere. 
+
+## Feed
+containers for photo
+## Guest Mode
+## Unsplash API
+
+## Styled Components
+
+## Error Bounding
+
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Available Scripts
 
 In the project directory, you can run:
