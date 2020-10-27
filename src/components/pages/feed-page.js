@@ -37,7 +37,7 @@ const FeedPage = ({feed, getLastPhotos, rememberScrollPosition}) => {
       return;
     }
     if (isLogged) {
-      userAuth();
+      userAuth(); //get request AFTER setting token/auth
     } 
     getLastPhotos();
   }, []);
@@ -46,8 +46,8 @@ const FeedPage = ({feed, getLastPhotos, rememberScrollPosition}) => {
   const onScrollFeed = (e) => {
     const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 1200);
 
-    if (scrollBottom && !feed.isFetching && !feed.error) { 
-      getLastPhotos();
+    if (scrollBottom && !feed.isFetching && !feed.error) {  //to avoid multiple requests
+      getLastPhotos(); 
     }
   };
 

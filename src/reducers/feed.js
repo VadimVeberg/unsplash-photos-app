@@ -8,7 +8,7 @@ const initialState = {
     },
     error: '',
     isFetching: false,
-    isShowedOnce: false,  
+    isShowedOnce: false,    // to avoid requests when the user returns from big photo to feed
     scrollPosition: 0,
 };
 
@@ -43,7 +43,7 @@ export function feedReducer(state = initialState, action) {
                 scrollPosition: action.payload
             }
         case LIKE_PHOTO_SUCCESS:
-            if (!state.isShowedOnce) {  
+            if (!state.isShowedOnce) {     //if feed wasn't loaded before user like photo
                 return state;
             } else {
                 const photos = createStoreWithChangedPhoto(state, action, true);
@@ -73,7 +73,7 @@ const createStoreWithChangedPhoto = ({photos}, {payload}, isLiked) => {
 
     let index = leftColSources.findIndex(photo => photo.id === photoId);
      
-    if (index !== -1) {     
+    if (index !== -1) {           //if index was found in left column array
         leftColSources = leftColSources.map((elem, i) => {
             return i !== index ? elem : { ...elem, liked_by_user: !elem.liked_by_user, likes: (isLiked ? ++elem.likes : --elem.likes) };
         });
