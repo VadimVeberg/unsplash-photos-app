@@ -1,12 +1,10 @@
 import React from 'react';
 
-//components
 import BigPicture from '../big-picture/big-picture';
 import BigPhotoCard from '../big-photo-card/big-photo-card';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
 
-//utils
 import { isEmpty } from '../../utils/utils';
 
 const BigPhotoItem = ({id, data}) => {

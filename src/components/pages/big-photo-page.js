@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
 
-//Components
 import AppHeader from '../app-header/app-header';
 import BigPhotoAppContent from '../big-photo-app-content/big-photo-app-content';
 import BigPhotoItem from '../big-photo-item/big-photo-item';
@@ -9,17 +8,13 @@ import Spinner from '../spinner/spinner';
 import LoadingStatus from '../loading-status/loading-status';
 import UndoButton from '../undo-button/undo-button';
 
-//context 
 import UserContext from '../../contexts/userContext';
 
-//styles
 import styled from 'styled-components';
 
-//Redux
 import { connect } from 'react-redux';
 import { getBigPhoto, clearStore } from '../../actions/BigPhotoActions';
 
-//router 
 import { Link } from 'react-router-dom';
 
 const UndoLink = styled(Link)`
@@ -42,7 +37,7 @@ const BigPhotoPage = ({bigPhoto, photoId, getBigPhoto, clearStore}) => {
                 userAuth();
             }
 
-            getBigPhoto(photoId);  //get request AFTER setting token/auth
+            getBigPhoto(photoId); 
         } 
     }, []);
 

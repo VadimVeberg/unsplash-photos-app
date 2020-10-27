@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 
-//Components
 import Button from '../button/button';
 
-//context 
 import UserContext from '../../contexts/userContext';
 const LogActionButton = ({type, size}) => {
     const { logIn, logOut } = useContext(UserContext);

@@ -16,6 +16,6 @@ export function userReducer(state = initialState, action) {
         case GET_TOKEN_FAIL:
             return {...state, isFetching: false, error: action.payload}
         default: 
-            return state
+            return state;
     }
 };

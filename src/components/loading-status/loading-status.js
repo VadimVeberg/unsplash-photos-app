@@ -1,6 +1,5 @@
 import React from 'react';
-//components
-//styles
+
 import styled from 'styled-components';
 
 const LoadingStatusWrapper = styled.div`

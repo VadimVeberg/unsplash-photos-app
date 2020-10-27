@@ -18,9 +18,6 @@ const initialState = {
         setTokenError: '',
     },
     isLogged: getLogInStatus(),
-    // isLogged: false - guest mode  
-    // isLogged: null - must suggest authorization 
-    // isLogged: true - get and set token
 };
 
 export function globalReducer(state = initialState, action) {

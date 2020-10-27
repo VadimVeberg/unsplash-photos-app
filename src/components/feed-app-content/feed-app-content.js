@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-//components
 import AppContent from '../app-content/app-content';
 
 const appContentElement = React.createRef();

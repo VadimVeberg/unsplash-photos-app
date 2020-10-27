@@ -1,5 +1,5 @@
 import React from 'react';
-//styles
+
 import './spinner.scss';
 import styled from 'styled-components';
 

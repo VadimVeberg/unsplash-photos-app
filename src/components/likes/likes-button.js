@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 
-//context 
 import UserContext from '../../contexts/userContext';
 import LikeActionsContext from '../../contexts/likeActionsContext';
 
-//styles
 import styled from 'styled-components';
 
 const LikesIconSvg = styled.svg`

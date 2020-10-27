@@ -1,9 +1,7 @@
 import React from 'react';
 
-//components
 import LikesButton from './likes-button';
 
-//styles
 import styled from 'styled-components';
 
 const LikesCount = styled.div`

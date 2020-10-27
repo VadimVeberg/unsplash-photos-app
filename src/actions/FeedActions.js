@@ -11,7 +11,7 @@ let uniqueIDs = [];
 let pageCounter = 1;
 
 const checkID = (id) => {
-    if (uniqueIDs.some(uniqueID => id === uniqueID)) {    //if some of ids is not unique
+    if (uniqueIDs.some(uniqueID => id === uniqueID)) {    
         return false;
     }
     else {

@@ -1,14 +1,12 @@
 import React from 'react';
-//components
+
 import PhotoCard from '../photo-card/photo-card';
 import Picture from '../picture/picture';
 import PhotoInfo from '../photo-info/photo-info';
 import Likes from '../likes/likes';
 
-//styles
 import styled from 'styled-components';
 
-//router
 import { Link } from 'react-router-dom';
 
 const LinkDiv = styled(Link)`

@@ -1,25 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 
-//Components
 import LogInWindow from '../logInWindow/logInWindow';
 import AuthPage from '../pages/auth-page';
 import FeedPage from '../pages/feed-page';
 import BigPhotoPage from '../pages/big-photo-page';
 
-//context
 import UserContext from '../../contexts/userContext';
 import LikeActionsContext from '../../contexts/likeActionsContext';
 
-//styles
 import styled, { ThemeProvider } from 'styled-components';
 import { Container } from 'reactstrap';
 import { theme } from '../../style_vars';
 
-//Redux
 import { connect } from 'react-redux';
 import { logIn, logOut, setToken, getAuthUrl, likePhoto, unLikePhoto } from '../../actions/GlobalActions';
 
-//router
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const AppContainer = styled(Container)`
@@ -58,7 +53,7 @@ const App = ({global: {token, isTokenSetted, isLogged} , logIn, logOut, setToken
   const isInitialMount = useRef(false);
 
   useEffect(() => {
-    if (isInitialMount.current) {    //imitating ComponentDidUpdate()
+    if (isInitialMount.current) {   
       //eslint-disable-next-line no-undef
       window.location.reload(false);
     } else {

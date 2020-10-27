@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-//components
+
 import UserMessage from '../userMessage/userMessage';
 import Spinner from '../spinner/spinner';
 import LoadingStatus from '../loading-status/loading-status';
-//styles
+
 import styled from 'styled-components';
-//redux
+
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/UserActions';
 

@@ -1,12 +1,9 @@
 import React, { useContext } from 'react'
 
-//components
 import LogActionButton from '../logActionButton/logActionButton';
 
-//context 
 import UserContext from '../../contexts/userContext';
 
-//styles
 import styled from 'styled-components';
 
 const ModalOverlay = styled.div`

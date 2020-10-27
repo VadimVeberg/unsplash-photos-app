@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
 
-//Components
 import AppHeader from '../app-header/app-header';
 import FeedAppContent from '../feed-app-content/feed-app-content';
 import FeedItem from '../feed-item/feed-item';
@@ -9,13 +8,10 @@ import Button from '../button/button';
 import Spinner from '../spinner/spinner';
 import LoadingStatus from '../loading-status/loading-status';
 
-//context
 import UserContext from '../../contexts/userContext';
 
-//styles 
 import styled from 'styled-components';
 
-//Redux
 import { connect } from 'react-redux';
 import { getLastPhotos, rememberScrollPosition } from '../../actions/FeedActions';
  
@@ -37,21 +33,20 @@ const FeedPage = ({feed, getLastPhotos, rememberScrollPosition}) => {
   const { isLogged, userAuth } = useContext(UserContext);
 
   useEffect(() => {
-    if (!feed.isShowedOnce) {
-      if (isLogged === true) {
-        userAuth();
-        getLastPhotos(); //get request AFTER setting token/auth
-      } else {
-        getLastPhotos();
-      }
+    if (feed.isShowedOnce) {
+      return;
     }
+    if (isLogged) {
+      userAuth();
+    } 
+    getLastPhotos();
   }, []);
 
 
   const onScrollFeed = (e) => {
     const scrollBottom = (e.target.scrollTop + e.target.offsetHeight > e.target.scrollHeight - 1200);
 
-    if (scrollBottom && !feed.isFetching && !feed.error) { //to allow multiple requests
+    if (scrollBottom && !feed.isFetching && !feed.error) { 
       getLastPhotos();
     }
   };

@@ -1,9 +1,7 @@
 import React from 'react';
 
-//components
 import BackgroundField from '../background-field/background-field';
 
-//styles
 import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
@@ -26,7 +24,7 @@ const FadeInBlock = styled.div`
 const Image = styled.img`
     position: absolute;
     top: 0;
-    
+
     width: 100%;
 
     border-radius: 10px;

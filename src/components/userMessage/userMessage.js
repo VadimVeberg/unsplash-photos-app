@@ -1,5 +1,5 @@
 import React from 'react';
-//styles
+
 import styled from 'styled-components';
 
 const MessageText = styled.span`

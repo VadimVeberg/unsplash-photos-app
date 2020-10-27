@@ -1,6 +1,5 @@
 import { unsplash } from '../utils/unsplash';
 
- //this global actions allows  authorize from any page of app:
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const CLEAR_STORE = 'CLEAR_STORE';
