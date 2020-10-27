@@ -1,15 +1,19 @@
 # [Unsplash Photos App](https://unsplash-photos.ru/)
-This is my diploma work on Skillbox course "JavaScript". Unsplash-photos-app allows you to watch and like photos from unsplash.com.
+This is my diploma work on Skillbox course "JavaScript".
 
 ## React, Redux and React-router
-No class components, I used **React hooks** everywhere. 
+No class components, I used **React hooks** everywhere. For routing between pages, for exmaple between [feed](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) and [big photo page](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/big-photo-page.js)
 
 ## Feed
 containers for photo
 ## Guest Mode
 ## Unsplash API
+Oauth
+Async actions, redux-thunk
+## Patterns
 
 ## Styled Components
+Dynamically created styles/ in some components
 
 ## Error Bounding
 
