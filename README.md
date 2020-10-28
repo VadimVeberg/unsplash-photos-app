@@ -10,17 +10,14 @@ I've made infinity feed that updates before you scroll down. If you have normal 
 ## Unsplash API
 Unsplash-photos-app get photos from unsplash.com using unsplash API. I also have made OAuth, so registered users can like photos. See [auth-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/auth-page.js), [userActions.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/actions/UserActions.js). App token stores in localStorage and sets everytime when you refreshing or opening any page of app. See [GlobalActions.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/actions/GlobalActions.js).
 
-I also used React.Context, React.createRef  и
-
-For routing between pages, for exmaple between [feed](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) and [big photo page](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/big-photo-page.js)
+## Patterns
+For combining a lot of React components together in one app I used React patterns. For example, Array as children [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 59), function as children [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 106), Render Callback [feed-item.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-item/feed-item.js) (line 28) etc.
 
 
 containers for photo
 ## Guest Mode
-## Unsplash API
-Oauth
-Async actions, redux-thunk
-## Patterns
+
+
 
 ## Styled Components and ReactStrap
 Dynamically created styles/ in some components
