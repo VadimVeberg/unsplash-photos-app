@@ -2,7 +2,7 @@
 This is my diploma work on Skillbox course "JavaScript".
 
 ## React, Redux and React-router
-That's the base of my app. No class components, **React hooks** everywhere instead. Redux store combined by few reducers accroding to each page of app and one global reducer for user authentication. Some actions are global, some are local for current page, see more at [actions](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/actions), [reducers](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/reducers), [store](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/store). Routing between pages is orginized with react-router.
+That's the base of my app. No class components, **React hooks** everywhere instead. Redux store combined by few reducers accroding to each page of app and one global reducer for user authentication. Some actions are global, some are local for current page, see more at [actions](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/actions), [reducers](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/g/reducers), [store](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/store). Routing between pages is orginized with react-router.
 
 ## Feed
 I've made infinity feed that updates before you scroll down. If you have normal internet connection and don't scroll feed very fast, you will not see loading spinner below. This component also save it scroll position in store before you switching to big photo page, so when you go back to feed you will appear exactly in place where you have been. See how I did that in [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js), [feed-app-content.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-app-content/feed-app-content.js).
@@ -13,20 +13,15 @@ Unsplash-photos-app get photos from unsplash.com using unsplash API. I also have
 ## Patterns
 For combining a lot of React components together in one app I used React patterns. For example, **Array as children** [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 59), **Function as Children** [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 106), **Render Callback** [feed-item.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-item/feed-item.js) (line 28) etc.
 
-
-containers for photo
-## Guest Mode
-
-
-
 ## Styled Components
-I've used Styled-components library to create styles dynamically depending of current app state. So you can find [logActionButton](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/logActionButton/logActionButton.js) component that changes styles themself by value of property 'type'. And for example if you have bad internet connection, photos in feed will load in pre-render colored containers. Height of containers calculating dynamically from server response. 
+I've used Styled-components library to create styles dynamically depending of current redux store. So you can find [logActionButton](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/logActionButton/logActionButton.js) component that changes styles themself by value of property 'type'. And for example if you have bad internet connection, photos in feed will load in pre-render colored containers. Height of containers calculating dynamically from server response. 
 
+## Adaptive
+Layout of this app is fully adaptive. I used some components from **Reactstrap** library to make this.
 
-## and ReactStrap
-## Error Bounding
-
-
+## Error handling
+If you have bad internet connection, my app will show you error message and suggest you to try load content again. I've made that using "error" properties in redux store and conditional rendering. 
+<img scr="https://vadimveberg.ru/assets/img/git_readme/Error_handling.png" alt="Error handling">
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Available Scripts
