@@ -21,7 +21,7 @@ Layout of this app is fully adaptive. I used some components from **Reactstrap**
 
 ## Error handling
 If you have bad internet connection, my app will show you error message and suggest you to try load content again. I've made that using "error" properties in redux store and conditional rendering. 
-<img scr="https://vadimveberg.ru/assets/img/git_readme/Error_handling.png" alt="Error handling">
+<img scr="https://vadimveberg.ru/assets/img/git_readme/Error_handling.png" width="550px" alt="Error handling">
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Available Scripts
