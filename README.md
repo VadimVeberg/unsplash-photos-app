@@ -2,11 +2,15 @@
 This is my diploma work on Skillbox course "JavaScript".
 
 ## React, Redux and React-router
-That's the base of my app. No classes components, **React hooks** everywhere instead. Redux store combined by few reducers accroding to each page of app and one global reducer for user authentication. Some actions are global, some are local for current page, see more at [actions](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/actions), [reducers](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/reducers), [store](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/store). 
-I also used React API  React.context and 
-For routing between pages, for exmaple between [feed](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) and [big photo page](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/big-photo-page.js)
+That's the base of my app. No class components, **React hooks** everywhere instead. Redux store combined by few reducers accroding to each page of app and one global reducer for user authentication. Some actions are global, some are local for current page, see more at [actions](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/actions), [reducers](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/reducers), [store](https://github.com/VadimVeberg/unsplash-photos-app/tree/master/src/store). Routing between pages is orginized with react-router.
 
 ## Feed
+I've made infinity feed that updates before you scroll down. If you have normal internet connection and don't scroll feed very fast, you will not see loading spinner below. This component also save it scroll position in store before you switching to big photo page, so when you go back to feed you will appear exactly in place where you have been. See how I did that in [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js), [feed-app-content.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-app-content/feed-app-content.js).
+I also used React.Context, React.createRef  и
+
+For routing between pages, for exmaple between [feed](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) and [big photo page](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/big-photo-page.js)
+
+
 containers for photo
 ## Guest Mode
 ## Unsplash API
