@@ -11,7 +11,7 @@ I've made infinity feed that updates before you scroll down. If you have normal 
 Unsplash-photos-app get photos from unsplash.com using unsplash API. I also have made OAuth, so registered users can like photos. See [auth-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/auth-page.js), [userActions.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/actions/UserActions.js). App token stores in localStorage and sets everytime when you refreshing or opening any page of app. See [GlobalActions.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/actions/GlobalActions.js).
 
 ## Patterns
-For combining a lot of React components together in one app I used React patterns. For example, Array as children [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 59), function as children [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 106), Render Callback [feed-item.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-item/feed-item.js) (line 28) etc.
+For combining a lot of React components together in one app I used React patterns. For example, **Array as children** [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 59), **Function as Children** [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js) (line 106), **Render Callback** [feed-item.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-item/feed-item.js) (line 28) etc.
 
 
 containers for photo
@@ -19,9 +19,11 @@ containers for photo
 
 
 
-## Styled Components and ReactStrap
-Dynamically created styles/ in some components
+## Styled Components
+I've used Styled-components library to create styles dynamically depending of current app state. So you can find [logActionButton](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/logActionButton/logActionButton.js) component that changes styles themself by value of property 'type'. And for example if you have bad internet connection, photos in feed will load in pre-render colored containers. Height of containers calculating dynamically from server response. 
 
+
+## and ReactStrap
 ## Error Bounding
 
 
