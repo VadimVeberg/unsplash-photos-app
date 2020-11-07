@@ -18,7 +18,7 @@ For combining a lot of React components together in one app I used React pattern
 ## Styled Components
 I've used Styled-components library to create styles dynamically depending of current redux store. So you can find [logActionButton](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/logActionButton/logActionButton.js) component that changes styles themself by value of property 'type'. And for example if you have bad internet connection, photos in feed will load in pre-render colored containers. Height of containers calculating dynamically from server response. 
 <br/>
-<img src="https://vadimveberg.ru/assets/img/git_readme/Pre-render.gif" alt="Pre-render containers">
+<img src="https://vadimveberg.ru/github_assets/unsplash_photos/Pre-render.gif" alt="Pre-render containers">
 
 ## Adaptive
 Layout of this app is fully adaptive. I used some components from **Reactstrap** library to make this.
