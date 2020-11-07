@@ -7,7 +7,7 @@ That's the base of my app. No class components, **React hooks** everywhere inste
 ## Feed
 I've made infinity feed that updates before you scroll down. If you have normal internet connection and don't scroll feed very fast, you will not see loading spinner below. This component also save it scroll position in store before you switching to big photo page, so when you go back to feed you will appear exactly in place where you have been. See how I did that in [feed-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/feed-page.js), [feed-app-content.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/feed-app-content/feed-app-content.js).
 <br/>
-<img src="https://vadimveberg.ru/assets/img/git_readme/Feed.gif" alt="Feed">
+<img src="https://vadimveberg.ru/github_assets/unsplash_photos/Feed.gif" alt="Feed">
 
 ## Unsplash API
 Unsplash-photos-app get photos from unsplash.com using unsplash API. I also have made OAuth, so registered users can like photos. See [auth-page.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/components/pages/auth-page.js), [userActions.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/actions/UserActions.js). App token stores in localStorage and sets everytime when you refreshing or opening any page of app. See [GlobalActions.js](https://github.com/VadimVeberg/unsplash-photos-app/blob/master/src/actions/GlobalActions.js).
@@ -25,7 +25,7 @@ Layout of this app is fully adaptive. I used some components from **Reactstrap**
 
 ## Error handling
 If you have bad internet connection, my app will show you error message and suggest you to try load content again. I've made that using "error" properties in redux store and conditional rendering.  <br>
-<img src="https://vadimveberg.ru/assets/img/git_readme/Error_handling.png" width="550px" alt="Error handling">
+<img src="https://vadimveberg.ru/github_assets/unsplash_photos/Error_handling.png" width="550px" alt="Error handling">
 
 ## Available Scripts
 
